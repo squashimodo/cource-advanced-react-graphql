@@ -20,21 +20,25 @@ var _jsxFileName = "/Users/temphabet/development/advancedreact/frontend/componen
 
 
 
+var floating = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["from{transform:translate(0,0px) rotateY(-12deg);text-shadow:7px 7px 3px rgba(0,0,0,0.15);}50%{transform:translate(0,10px) rotateY(5deg) rotateX(5deg);text-shadow:-7px -7px 3px rgba(0,0,0,0.15);}to{transform:translate(0,0px) rotateY(-8deg);text-shadow:7px 7px 3px rgba(0,0,0,0.15);}"]);
 var Logo = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].h1.withConfig({
   displayName: "Header__Logo",
   componentId: "sc-2cpreo-0"
-})(["font-size:4rem;margin-left:2rem;position:relative;z-index:2;transform:skew(-7deg);font-family:RadnikaNext;a{padding:0.5rem 1rem;background:", ";color:white;text-decoration:none;text-transform:uppercase;}@media (max-width:1300px){margin:0;text-align:center;}"], function (_ref) {
+})(["animation:", " 20s infinite;font-size:4rem;margin-left:2rem;position:relative;z-index:2;transform:skew(-10deg);font-family:RadnikaNext;padding:100px 0 30px 0;a{padding:0.5rem 1rem;", ";color:white;text-decoration:none;text-transform:uppercase;}@media (max-width:1300px){margin:0;text-align:center;}"], floating, function (_ref) {
   var theme = _ref.theme;
-  return theme.red;
+  return theme.orangeGradient;
 });
 var StyledHeader = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].header.withConfig({
   displayName: "Header__StyledHeader",
   componentId: "sc-2cpreo-1"
-})([".bar{border-bottom:7px solid ", ";display:grid;grid-template-columns:auto 1fr;justify-content:space-between;align-items:stretch;@media (max-width:1300px){grid-template-columns:1fr;justify-content:center;}}.sub-bar{border-bottom:3px solid ", "}"], function (_ref2) {
+})(["", "}.bar{border-bottom:7px solid ", ";display:grid;grid-template-columns:auto 1fr;justify-content:space-between;align-items:stretch;@media (max-width:1300px){grid-template-columns:1fr;justify-content:center;}}.sub-bar{border-bottom:3px solid ", "}"], function (_ref2) {
   var theme = _ref2.theme;
-  return theme.black;
+  return theme.blueGradient;
 }, function (_ref3) {
   var theme = _ref3.theme;
+  return theme.black;
+}, function (_ref4) {
+  var theme = _ref4.theme;
   return theme.offWhite;
 });
 var Search = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].input.attrs({
@@ -49,59 +53,59 @@ var Header = function Header() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledHeader, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 73
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bar",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 74
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 75
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 76
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 76
     },
     __self: this
   }, "Things for sale"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 78
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sub-bar",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 80
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Search, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 81
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cart",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 83
     },
     __self: this
   }));
@@ -223,7 +227,10 @@ var Menu = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].ul.withConf
 var MenuItem = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].li.withConfig({
   displayName: "Navigation__MenuItem",
   componentId: "sc-1i0suwf-1"
-})(["margin:0 10px;transform:skew(-7deg);padding:10px;font-family:RadnikaNext;a{text-decoration:none;font-weight:bold;}"]);
+})(["margin:0 10px;transform:skew(-7deg);padding:10px;font-family:RadnikaNext;a{display:block;color:", ";text-decoration:none;font-weight:bold;transition:all .1s ease-in-out;&:hover{transform:scale(1.3);}}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.offWhite;
+});
 
 var Navigation =
 /*#__PURE__*/
@@ -242,48 +249,48 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Menu, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 31
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuItem, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 32
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
         href: "/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 28
-        },
-        __self: this
-      }, "Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuItem, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 31
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        href: "/sell",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 32
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        __source: {
-          fileName: _jsxFileName,
           lineNumber: 33
         },
         __self: this
-      }, "Sell"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 34
+        },
+        __self: this
+      }, "Go Home!"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuItem, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 37
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: "/buy",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 38
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 39
+        },
+        __self: this
+      }, "Buy stuff!"))));
     }
   }]);
 
@@ -329,7 +336,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  @font-face {\n    font-family: RadnikaNext;\n    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');\n  }\n\n  h1, h2, h3, h4, h5, h6 {\n    font-family: RadnikaNext;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  @font-face {\n    font-family: RadnikaNext;\n    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');\n  }\n\n  h1, h2, h3, h4, h5, h6 {\n    font-family: RadnikaNext;\n  }\n\n  body {}\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -351,7 +358,10 @@ var theme = {
   lightgrey: '#E1E1E1',
   offWhite: '#EDEDED',
   maxWidth: '1000px',
-  bs: '0 12px 24px 0 rgba(0,0,0,.09)'
+  bs: '0 12px 24px 0 rgba(0,0,0,.09)',
+  asphaltBackground: 'background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png"), linear-gradient(-45deg, rgb(53,54,67), rgb(33,36,43))',
+  blueGradient: 'background: linear-gradient(to right, #1e3c72, #2a5298)',
+  orangeGradient: 'background: linear-gradient(-45deg, rgb(255,120,40), rgb(255,102,6))'
 };
 Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["injectGlobal"])(_templateObject());
 var StyledPage = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
@@ -388,31 +398,31 @@ function (_Component) {
         theme: theme,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 42
+          lineNumber: 47
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StyledPage, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 48
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Meta__WEBPACK_IMPORTED_MODULE_2__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 49
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 50
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Inner, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 46
+          lineNumber: 51
         },
         __self: this
       }, children)));
@@ -16492,8 +16502,8 @@ function (_App) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(styled_jsx_style__WEBPACK_IMPORTED_MODULE_0___default.a, {
-        styleId: "545344427",
-        css: "body{padding:40px 0;margin:0;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90ZW1waGFiZXQvZGV2ZWxvcG1lbnQvYWR2YW5jZWRyZWFjdC9mcm9udGVuZC9wYWdlcy9fYXBwLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQVEyQixBQUc0QixlQUNOLFNBQ1giLCJmaWxlIjoiL1VzZXJzL3RlbXBoYWJldC9kZXZlbG9wbWVudC9hZHZhbmNlZHJlYWN0L2Zyb250ZW5kL3BhZ2VzL19hcHAuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQXBwLCB7IENvbnRhaW5lciB9IGZyb20gJ25leHQvYXBwJztcbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgUGFnZSBmcm9tICcuLi9jb21wb25lbnRzL1BhZ2UnO1xuY2xhc3MgTXlBcHAgZXh0ZW5kcyBBcHAge1xuICByZW5kZXIoKSB7XG4gICAgY29uc3QgeyBDb21wb25lbnQgfSA9IHRoaXMucHJvcHM7XG4gICAgcmV0dXJuIChcbiAgICAgIDxDb250YWluZXI+XG4gICAgICAgIDxzdHlsZSBqc3ggZ2xvYmFsPntgXG4gICAgICAgICAgYm9keSB7IFxuICAgICAgICAgICAgcGFkZGluZzogNDBweCAwO1xuICAgICAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICAgIH1cbiAgICAgICAgYH08L3N0eWxlPlxuICAgICAgICA8UGFnZT5cbiAgICAgICAgICA8Q29tcG9uZW50IC8+XG4gICAgICAgIDwvUGFnZT5cbiAgICAgIDwvQ29udGFpbmVyPlxuICAgICk7XG4gIH1cbn1cblxuZXhwb3J0IGRlZmF1bHQgTXlBcHA7Il19 */\n/*@ sourceURL=/Users/temphabet/development/advancedreact/frontend/pages/_app.js */",
+        styleId: "107698190",
+        css: "body{padding:0 0;margin:0;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90ZW1waGFiZXQvZGV2ZWxvcG1lbnQvYWR2YW5jZWRyZWFjdC9mcm9udGVuZC9wYWdlcy9fYXBwLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQVEyQixBQUd5QixZQUNILFNBQ1giLCJmaWxlIjoiL1VzZXJzL3RlbXBoYWJldC9kZXZlbG9wbWVudC9hZHZhbmNlZHJlYWN0L2Zyb250ZW5kL3BhZ2VzL19hcHAuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQXBwLCB7IENvbnRhaW5lciB9IGZyb20gJ25leHQvYXBwJztcbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgUGFnZSBmcm9tICcuLi9jb21wb25lbnRzL1BhZ2UnO1xuY2xhc3MgTXlBcHAgZXh0ZW5kcyBBcHAge1xuICByZW5kZXIoKSB7XG4gICAgY29uc3QgeyBDb21wb25lbnQgfSA9IHRoaXMucHJvcHM7XG4gICAgcmV0dXJuIChcbiAgICAgIDxDb250YWluZXI+XG4gICAgICAgIDxzdHlsZSBqc3ggZ2xvYmFsPntgXG4gICAgICAgICAgYm9keSB7IFxuICAgICAgICAgICAgcGFkZGluZzogMCAwO1xuICAgICAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICAgIH1cbiAgICAgICAgYH08L3N0eWxlPlxuICAgICAgICA8UGFnZT5cbiAgICAgICAgICA8Q29tcG9uZW50IC8+XG4gICAgICAgIDwvUGFnZT5cbiAgICAgIDwvQ29udGFpbmVyPlxuICAgICk7XG4gIH1cbn1cblxuZXhwb3J0IGRlZmF1bHQgTXlBcHA7Il19 */\n/*@ sourceURL=/Users/temphabet/development/advancedreact/frontend/pages/_app.js */",
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_Page__WEBPACK_IMPORTED_MODULE_3__["default"], {
         __source: {
@@ -16502,7 +16512,7 @@ function (_App) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Component, {
-        className: "jsx-545344427",
+        className: "jsx-107698190",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 16

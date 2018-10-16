@@ -120,7 +120,31 @@ var Home = function Home(props) {
       lineNumber: 5
     },
     __self: this
-  }, "Hilo"));
+  }, "Welcome to this site"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: this
+  }, "Here you can buy stuff"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: this
+  }, "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam consectetur repellat hic harum incidunt temporibus ut veritatis! Architecto impedit provident omnis. Corrupti, quia voluptas minima aliquid ad laudantium provident qui."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8
+    },
+    __self: this
+  }, "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam consectetur repellat hic harum incidunt temporibus ut veritatis! Architecto impedit provident omnis. Corrupti, quia voluptas minima aliquid ad laudantium provident qui."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
+    },
+    __self: this
+  }, "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam consectetur repellat hic harum incidunt temporibus ut veritatis! Architecto impedit provident omnis. Corrupti, quia voluptas minima aliquid ad laudantium provident qui."));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
