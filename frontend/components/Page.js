@@ -10,7 +10,10 @@ const theme = {
   lightgrey: '#E1E1E1',
   offWhite: '#EDEDED',
   maxWidth: '1000px',
-  bs: '0 12px 24px 0 rgba(0,0,0,.09)'
+  bs: '0 12px 24px 0 rgba(0,0,0,.09)',
+  asphaltBackground: 'background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png"), linear-gradient(-45deg, rgb(53,54,67), rgb(33,36,43))',
+  blueGradient: 'background: linear-gradient(to right, #1e3c72, #2a5298)',
+  orangeGradient: 'background: linear-gradient(-45deg, rgb(255,120,40), rgb(255,102,6))',
 };
 
 injectGlobal`
@@ -22,6 +25,8 @@ injectGlobal`
   h1, h2, h3, h4, h5, h6 {
     font-family: RadnikaNext;
   }
+
+  body {}
 `;
 
 const StyledPage = styled.div`

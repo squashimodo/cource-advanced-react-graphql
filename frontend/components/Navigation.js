@@ -14,8 +14,14 @@ const MenuItem = styled.li`
   font-family: RadnikaNext;
 
   a {
+    display: block;
+    color: ${({theme}) => theme.offWhite};
     text-decoration: none;
     font-weight: bold;
+    transition: all .1s ease-in-out;
+    &:hover {
+      transform: scale(1.3);
+    }
   }
 `;
 
@@ -25,12 +31,12 @@ class Navigation extends Component {
       <Menu>
         <MenuItem>
           <Link href="/">
-            <a>Home</a>
+            <a>Go Home!</a>
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link href="/sell">
-            <a>Sell</a>
+          <Link href="/buy">
+            <a>Buy stuff!</a>
           </Link>
         </MenuItem>
       </Menu>
