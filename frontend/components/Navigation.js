@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
+import Link from './Link';
 import styled from 'styled-components';
 
 const menuItems = [
@@ -48,13 +48,12 @@ const MenuItem = styled.li`
       transform: scale(1.3);
     }
 
-    &:hover:after {
+    &:hover:after, &.active:after {
       width: 90%;
     }
 
     &:after {
       transition: width .1s ease-in-out;
-
       content: '';
       position: absolute;
       bottom: -3px;
