@@ -17,6 +17,7 @@ const floating = keyframes`
     text-shadow: 7px 7px 3px rgba(0,0,0,0.15);
   }
 `;
+
 const Logo = styled.h1`
   animation: ${floating} 20s infinite;
   font-size: 4rem;
@@ -29,7 +30,7 @@ const Logo = styled.h1`
 
   a {
     padding: 0.5rem 1rem;
-    ${({theme}) => theme.orangeGradient};
+    background: ${({theme}) => theme.orangeGradient};
     color: white;
     text-decoration: none;
     text-transform: uppercase;
@@ -42,20 +43,20 @@ const Logo = styled.h1`
 `;
 
 const StyledHeader = styled.header`
-  ${({theme}) => theme.blueGradient}}
+  background: ${({theme}) => theme.blueGradient}}
   .bar {
     border-bottom: 7px solid ${({theme}) => theme.black};
     display: grid;
-    grid-template-columns: auto 1fr;
-    justify-content: space-between;
+    grid-template-columns: 1fr;
+    justify-content: center;
     align-items: stretch;
-    @media (max-width: 1300px) {
-      grid-template-columns: 1fr;
-      justify-content: center;
+    @media (min-width: 1300px) {
+      grid-template-columns: auto 1fr;
+      justify-content: space-between;
     }
   }
   .sub-bar {
-    border-bottom: 3px solid ${({theme}) => theme.offWhite}
+    border-bottom: 1px solid ${({theme}) => theme.offWhite}
   }
 `;
 
