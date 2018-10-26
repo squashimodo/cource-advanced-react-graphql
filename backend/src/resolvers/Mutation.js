@@ -1,8 +1,11 @@
 const Mutations = {
-  createDog(parent, args, context, info) {
-    global.dogs = global.dogs || [];
-    global.dogs = [...global.dogs, { name: args.name }]
-    return { name: args.name };
+  async createItem(parent, args, context, info) {
+    // TODO Check if logged in
+    return await context.db.mutation.createItem({
+      data: {
+        ...args
+      }
+    }, info);
   }
 };
 
