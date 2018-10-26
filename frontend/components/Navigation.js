@@ -44,7 +44,8 @@ const MenuItem = styled.li`
     text-decoration: none;
     font-weight: bold;
     transition: transform .1s ease-in-out;
-    &:hover, &:focus {
+  
+    &:hover, &:focus, &.active {
       transform: scale(1.3);
     }
 
