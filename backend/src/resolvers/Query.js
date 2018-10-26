@@ -1,13 +1,6 @@
 const Query = {
   dogs(parent, args, context, info) {
-    return [
-      {
-        name: 'Snickers'
-      },
-      {
-        name: 'Sunny'
-      }
-  ]
+    return global.dogs || [];
   }
 };
 

@@ -1,5 +1,5 @@
 type Mutation {
-  foo: String
+  createDog(name: String!): Dog
 }
 
 type Dog {
