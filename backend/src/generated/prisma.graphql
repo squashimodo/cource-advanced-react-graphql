@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/hans-bentlov-885312/thingsforsale/dev
-# timestamp: Tue Oct 16 2018 22:15:07 GMT+0200 (CEST)
+# timestamp: Fri Oct 26 2018 16:58:43 GMT+0200 (CEST)
 
 type AggregateUser {
   count: Int!
@@ -21,7 +21,7 @@ type Mutation {
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteUser(where: UserWhereUniqueInput!): User
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyInput!, where: UserWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
@@ -157,6 +157,11 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  name: String
+  email: String
+}
+
+input UserUpdateManyInput {
   name: String
   email: String
 }
