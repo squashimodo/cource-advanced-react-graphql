@@ -9,7 +9,7 @@ const menuItems = [
   },
   {
     label: 'Buy stuff',
-    href: '/buy'
+    href: '/items'
   },
   {
     label: 'Sign me up!',
