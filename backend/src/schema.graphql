@@ -9,6 +9,10 @@ type Mutation {
     image: String,
     largeImage: String
   ) : Item!
+
+  deleteItem(
+    id: ID!
+  ) : Item
 }
 
 type Dog {

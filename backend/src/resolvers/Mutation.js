@@ -6,6 +6,14 @@ const Mutations = {
         ...args
       }
     }, info);
+  },
+
+  async deleteItem(parent, args, context, info) {
+    return await context.db.mutation.deleteItem({
+      where: {
+        id: args.id
+      }
+    })
   }
 };
 
