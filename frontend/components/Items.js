@@ -17,9 +17,11 @@ const ALL_ITEMS_QUERY = gql`
 `;
 
 const StyledItems = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: -20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 export default class Items extends Component {
@@ -32,7 +34,7 @@ export default class Items extends Component {
         return (
           <StyledItems>
             {data.items.map(item => (
-              <Item {...item} />
+              <Item item={item} />
             ))}
           </StyledItems>
         )

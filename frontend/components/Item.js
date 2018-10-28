@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import formatCurrency from '../lib/formatMoney';
 const StyledItem = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 450px;
-  margin: 20px;
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: 250px;
 
   box-shadow: 1px 5px 12px 2px #0000000d;;
   border-radius: 10px;
@@ -68,17 +66,37 @@ const StyledItem = styled.div`
 `;
 
 class Item extends Component {
+  static propTypes = {
+    item: PropTypes.object.isRequired
+  }
+
   render() {
-    const { id, title, description, price } = this.props; 
+    const { id, title, description, price, image } = this.props.item; 
     return (
-      <StyledItem {...this.props} className="item" key={id}>
-        <div className="item__title">{title}</div>
+      <StyledItem {...this.props.item} className="item" key={id}>
+        <div className="item__title"><Link href={{
+          pathname: '/item',
+          query: {
+            id:  id
+          }
+        }} ><a>{title}</a></Link></div>
         <div className="item__image"></div> 
         <div className="item__description">{description}</div>
-        <div className="item__price">{price} ,-</div>
+        <div className="item__price">{formatCurrency(price)}</div>
         <div className="item__actions">
-          <div>Add to cart</div>
-          <div>Add to favorite</div>
+          <Link href={{
+            pathname: 'update',
+            query: {
+              id: id
+            }
+          }}><a>Edit ✏️</a>
+          </Link>
+          <Link href="#">
+            <a onClick={() => {}}>Add to cart 🛒</a>
+          </Link>
+          <Link href="#" >
+            <a onClick={() => {}}>Add to favorite ❤️</a>
+          </Link>
         </div>
       </StyledItem>
     );
