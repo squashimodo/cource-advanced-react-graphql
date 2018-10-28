@@ -34,7 +34,7 @@ export default class Items extends Component {
         return (
           <StyledItems>
             {data.items.map(item => (
-              <Item item={item} />
+              <Item key={item.id} item={item} />
             ))}
           </StyledItems>
         )

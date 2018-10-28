@@ -3,6 +3,26 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import formatCurrency from '../lib/formatMoney';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import { CREATE_ITEM_MUTATION } from './CreateItem';
+import Router from 'next/router';
+
+const DELETE_ITEM_MUTATION = gql`
+  mutation DELETE_ITEM_MUTATION(
+    $id: ID!
+  ) {
+    deleteItem(
+      id: $id
+    ) {
+      id
+    }
+  }
+`;
+
+export { DELETE_ITEM_MUTATION };
+
+
 const StyledItem = styled.div`
   position: relative;
   display: flex;
@@ -73,7 +93,7 @@ class Item extends Component {
   render() {
     const { id, title, description, price, image } = this.props.item; 
     return (
-      <StyledItem {...this.props.item} className="item" key={id}>
+      <StyledItem {...this.props.item} className="item">
         <div className="item__title"><Link href={{
           pathname: '/item',
           query: {
@@ -97,6 +117,22 @@ class Item extends Component {
           <Link href="#" >
             <a onClick={() => {}}>Add to favorite ❤️</a>
           </Link>
+          <Mutation mutation={DELETE_ITEM_MUTATION} variables={{ id: id }}>
+            {(deleteItem, { loading, error, called, data }) => (
+              <Link href="#" >
+              <a onClick={async (e) => {
+                e.preventDefault();
+                await deleteItem();
+                Router.push({
+                  pathname: '/items',
+                  query: {
+                    deleted: id
+                  }
+                });
+              }}>Remove ️☠️</a>
+            </Link>
+          )}
+          </Mutation>
         </div>
       </StyledItem>
     );
