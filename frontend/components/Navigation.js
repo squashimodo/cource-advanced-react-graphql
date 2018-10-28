@@ -4,19 +4,23 @@ import styled from 'styled-components';
 
 const menuItems = [
   {
-    label: 'Take me home!',
+    label: 'Take me home! 🏠',
     href: '/'
   },
   {
-    label: 'Buy stuff',
+    label: 'Buy stuff 🤑',
     href: '/items'
   },
   {
-    label: 'Sign me up!',
+    label: 'Sell stuff 📈',
+    href: '/sell'
+  },
+  {
+    label: 'Sign me up! ➕',
     href: '/signup'
   },
   {
-    label: 'Orders',
+    label: 'Orders 📝',
     href: '/orders'
   },
   {
