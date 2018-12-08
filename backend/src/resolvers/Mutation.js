@@ -23,6 +23,12 @@ const Mutations = {
       where: { id: args.id },
       data: Object.keys(itemData).reduce((obj, curr) => itemData[curr] ? { ...obj, [curr]: itemData[curr] } : obj,{})
     }, info)
+  },
+
+  async deleteItem(parent, args, context, info) {
+    return await context.db.mutation.deleteItem({
+      where: { id: args.id }
+    })
   }
 };
 

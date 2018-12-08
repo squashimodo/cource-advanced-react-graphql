@@ -7,18 +7,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CREATE_ITEM_MUTATION } from './CreateItem';
 import Router from 'next/router';
-
-const DELETE_ITEM_MUTATION = gql`
-  mutation DELETE_ITEM_MUTATION(
-    $id: ID!
-  ) {
-    deleteItem(
-      id: $id
-    ) {
-      id
-    }
-  }
-`;
+import DeleteItem from './DeleteItem';
 
 export { DELETE_ITEM_MUTATION };
 
@@ -112,27 +101,14 @@ class Item extends Component {
           }}><a>Edit ✏️</a>
           </Link>
           <Link href="#">
-            <a onClick={() => {}}>Add to cart 🛒</a>
+            <a onClick={() => {}}>Add to 🛒</a>
           </Link>
           <Link href="#" >
-            <a onClick={() => {}}>Add to favorite ❤️</a>
+            <a onClick={() => {}}>Add to ❤️</a>
           </Link>
-          <Mutation mutation={DELETE_ITEM_MUTATION} variables={{ id: id }}>
-            {(deleteItem, { loading, error, called, data }) => (
-              <Link href="#" >
-              <a onClick={async (e) => {
-                e.preventDefault();
-                await deleteItem();
-                Router.push({
-                  pathname: '/items',
-                  query: {
-                    deleted: id
-                  }
-                });
-              }}>Remove ️☠️</a>
-            </Link>
-          )}
-          </Mutation>
+          <DeleteItem id={id}>
+            Remove ☠️
+          </DeleteItem>
         </div>
       </StyledItem>
     );

@@ -24,6 +24,7 @@ const StyledItems = styled.div`
   margin: 0 auto;
 `;
 
+export { ALL_ITEMS_QUERY };
 export default class Items extends Component {
   render() {
     return <Query query={ALL_ITEMS_QUERY}>
@@ -42,3 +43,4 @@ export default class Items extends Component {
     </Query>
   }
 }
+
