@@ -14,6 +14,15 @@ const Mutations = {
         id: args.id
       }
     })
+  },
+
+  async updateItem(parent, args, context, info) {
+    const itemData =  { ...args };
+    delete itemData.id;
+    return await context.db.mutation.updateItem({
+      where: { id: args.id },
+      data: Object.keys(itemData).reduce((obj, curr) => itemData[curr] ? { ...obj, [curr]: itemData[curr] } : obj,{})
+    }, info)
   }
 };
 

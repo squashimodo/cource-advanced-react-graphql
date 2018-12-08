@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/hans-bentlov-885312/thingsforsale/dev
-# timestamp: Fri Oct 26 2018 22:42:33 GMT+0200 (CEST)
+# timestamp: Sat Dec 08 2018 20:44:54 GMT+0100 (CET)
 
 type AggregateItem {
   count: Int!
@@ -131,7 +131,7 @@ input ItemUpdateInput {
   price: Int
 }
 
-input ItemUpdateManyInput {
+input ItemUpdateManyMutationInput {
   title: String
   description: String
   image: String
@@ -435,8 +435,8 @@ type Mutation {
   deleteItem(where: ItemWhereUniqueInput!): Item
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
-  updateManyUsers(data: UserUpdateManyInput!, where: UserWhereInput): BatchPayload!
-  updateManyItems(data: ItemUpdateManyInput!, where: ItemWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
 }
@@ -581,7 +581,7 @@ input UserUpdateInput {
   email: String
 }
 
-input UserUpdateManyInput {
+input UserUpdateManyMutationInput {
   name: String
   email: String
 }
