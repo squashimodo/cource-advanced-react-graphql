@@ -65,7 +65,7 @@ class CreateItem extends Component {
   }
 
   render() {
-    const { mutate: createItem } = this.props;
+    const { createItem } = this.props;
     const { loading, error } = this.state;
     return (
       <Form onSubmit={async (e) => {
@@ -143,5 +143,7 @@ class CreateItem extends Component {
 }
 
 //export default CreateItem;
-export default graphql(CREATE_ITEM_MUTATION)(CreateItem)
+export default graphql(CREATE_ITEM_MUTATION, {
+  name: 'createItem'
+})(CreateItem)
 export { CREATE_ITEM_MUTATION };
