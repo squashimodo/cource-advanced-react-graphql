@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/hans-bentlov-885312/thingsforsale/dev
-# timestamp: Thu Dec 13 2018 21:34:48 GMT+0100 (CET)
+# timestamp: Thu Dec 13 2018 21:57:46 GMT+0100 (CET)
 
 type AggregateItem {
   count: Int!
@@ -502,9 +502,9 @@ type User implements Node {
   name: String!
   email: String!
   password: String!
-  resetToken: String!
+  resetToken: String
   resetTokenExpiry: Float
-  permission: [Permission!]!
+  permissions: [Permission!]!
 }
 
 """A connection to a list of items."""
@@ -521,12 +521,12 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
-  resetToken: String!
+  resetToken: String
   resetTokenExpiry: Float
-  permission: UserCreatepermissionInput
+  permissions: UserCreatepermissionsInput
 }
 
-input UserCreatepermissionInput {
+input UserCreatepermissionsInput {
   set: [Permission!]
 }
 
@@ -563,9 +563,9 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
-  resetToken: String!
+  resetToken: String
   resetTokenExpiry: Float
-  permission: [Permission!]!
+  permissions: [Permission!]!
 }
 
 type UserSubscriptionPayload {
@@ -613,7 +613,7 @@ input UserUpdateInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
-  permission: UserUpdatepermissionInput
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateManyMutationInput {
@@ -622,10 +622,10 @@ input UserUpdateManyMutationInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
-  permission: UserUpdatepermissionInput
+  permissions: UserUpdatepermissionsInput
 }
 
-input UserUpdatepermissionInput {
+input UserUpdatepermissionsInput {
   set: [Permission!]
 }
 

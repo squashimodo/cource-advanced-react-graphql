@@ -21,6 +21,11 @@ type Mutation {
     price: Int
   ): Item
   
+  signup(
+    email: String!
+    password: String!
+    name: String!
+  ): User!
 }
 
 
