@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Link from './Link';
 import styled from 'styled-components';
-
+import User from './User';
 const menuItems = [
   {
     label: 'Take me home! 🏠',
@@ -76,6 +76,11 @@ class Navigation extends Component {
   render() {
     return (
       <Menu>
+        <User>
+          {({data: { me }}) => (
+            <p>{me ? <p>{me.name}</p> : ''}</p>
+          )}
+        </User>
         {menuItems.map(item => (
           <MenuItem key={`${item.href}${item.label}`}>
             <Link href={item.href}>
