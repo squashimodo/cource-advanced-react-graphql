@@ -6,7 +6,9 @@
     "start": "nodemon -e js,graphql -x node src/index.js",
     "dev": "nodemon -e js,graphql -x node --inspect src/index.js",
     "test": "jest",
-    "deploy": "prisma deploy"
+    "deploy": "prisma deploy",
+    "seeditems": "node ./loadFakeProducts",
+    "removeAllItems": "node ./deleteAllitems"
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
@@ -34,5 +36,8 @@
     ]
   },
   "main": "index.js",
-  "author": ""
+  "author": "",
+  "devDependencies": {
+    "faker": "^4.1.0"
+  }
 }
