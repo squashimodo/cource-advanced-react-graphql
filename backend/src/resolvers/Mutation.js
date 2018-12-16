@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { promisify } = require('util');
 const randomBytes = promisify(crypto.randomBytes);
+const { transport, makeANiceEmail } = require('../mail');
+
 const Mutations = {
   async createItem(parent, args, context, info) {
     // TODO Check if logged in
@@ -63,6 +65,17 @@ const Mutations = {
         resetToken: resetToken,
         resetTokenExpiry: resetTokenExpiry
       }
+    });
+
+    const mailResponse = await transport.sendMail({
+      from: 'noreply@store.com',
+      to: user.email,
+      subject: 'Reset password',
+      html: makeANiceEmail(
+        `Click the following link to enter a new password \n\n
+        <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">Click here!</a>
+        `
+      )
     });
 
     return {
