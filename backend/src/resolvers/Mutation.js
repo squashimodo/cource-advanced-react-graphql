@@ -29,6 +29,16 @@ const Mutations = {
   }),
 
   async deleteItem(parent, args, context, info) {
+    const item = await context.db.query.item({
+      where: {
+        id: args.id
+      }
+    }, '{ id, title, user { id } }');
+
+    const ownsItem = item.user.id === context.request.userId;
+    const hasPermission = context.request.user.permissions.some(p => ['ADMIN', 'ITEMDELETE'].includes(p))
+    
+    if(!ownsItem && hasPermission) throw new Error('You dont have permissions to do this')
     return await context.db.mutation.deleteItem({
       where: {
         id: args.id
@@ -43,12 +53,6 @@ const Mutations = {
       where: { id: args.id },
       data: Object.keys(itemData).reduce((obj, curr) => itemData[curr] ? { ...obj, [curr]: itemData[curr] } : obj,{})
     }, info)
-  },
-
-  async deleteItem(parent, args, context, info) {
-    return await context.db.mutation.deleteItem({
-      where: { id: args.id }
-    })
   },
   
   signout(parent, { email }, context, info) {

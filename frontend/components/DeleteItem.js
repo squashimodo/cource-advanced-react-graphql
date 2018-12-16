@@ -42,13 +42,16 @@ class DeleteItem extends Component {
               <StyledLink href="#" loading={loading} onClick={async (e) => {
                 e.preventDefault();
                 if (confirm('Are you sure you want to delete this item?')) {
-                  await deleteItem();
-                  Router.push({
-                    pathname: '/items',
-                    query: {
-                      deleted: id
-                    }
-                  });
+                  deleteItem()
+                    .then(() => {
+                      Router.push({
+                        pathname: '/items',
+                        query: {
+                          deleted: id
+                        }
+                      });
+                    })
+                    .catch(e => alert(e.message));
                 } 
                 
               }}>{this.props.children}</StyledLink>
