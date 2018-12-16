@@ -37,6 +37,16 @@ type Mutation {
   ) : User!
 
   signout: SuccessMessage
+
+  requestReset(
+    email: String!
+  ) : SuccessMessage
+
+  resetPassword(
+    confirmPassword: String!
+    password: String!
+    resetToken: String!
+  ): SuccessMessage
 }
 
 
@@ -52,4 +62,11 @@ type Query {
   item(where: ItemWhereUniqueInput!): Item
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   me: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  permissions: [Permission!]!
 }

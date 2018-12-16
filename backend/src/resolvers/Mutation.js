@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const crypto = require('crypto');
+const { promisify } = require('util');
+const randomBytes = promisify(crypto.randomBytes);
 const Mutations = {
   async createItem(parent, args, context, info) {
     // TODO Check if logged in
@@ -39,6 +41,65 @@ const Mutations = {
     return {
       message: 'Bye!'
     };
+  },
+
+  async requestReset(parent, { email }, context, info) {
+    const user = await context.db.query.user({
+      where: {
+        email
+      }
+    });
+
+    if (!user) throw new Error(`No such user found for email ${email}`);
+
+    const resetToken = (await randomBytes(20)).toString('hex');
+    const resetTokenExpiry = Date.now() + 3600000; // 1h from now
+
+    const response = await context.db.mutation.updateUser({
+      where: {
+        email: email
+      },
+      data: {
+        resetToken: resetToken,
+        resetTokenExpiry: resetTokenExpiry
+      }
+    });
+
+    return {
+      message: 'Done!'
+    };
+  },
+
+  async resetPassword(parent, { password, confirmPassword, resetToken}, context, info) {
+    if (confirmPassword !== password) throw new Error('Passwords does not match');
+    const [user] = await context.db.query.users({
+      where: {
+        resetToken: resetToken,
+        resetTokenExpiry_gte: Date.now() - 3600000
+      }
+    });
+
+    if (!user) throw new Error('This token is either invalid or expired');
+
+    const updatedUser = await context.db.mutation.updateUser({
+      where: { email: user.email },
+      data: {
+        password: await bcrypt.hash(password, 10),
+        resetToken: null,
+        resetTokenExpiry: null
+      }
+    });
+
+    const token = jwt.sign({
+      userId: user.id
+    }, process.env.APP_SECRET);
+
+    context.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000*60*60*24*365 // 1year cookie
+    });
+
+    return updatedUser;
   },
 
   async signin(parent, { email, password }, context, info) {
@@ -91,6 +152,8 @@ const Mutations = {
 
     return user;
   }
+
+
 
 };
 module.exports = Mutations;
