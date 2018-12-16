@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Link from './Link';
 import styled from 'styled-components';
 import User from './User';
+import Signout from './Logout';
+
 const menuItems = [
   {
     label: 'Take me home! 🏠',
@@ -78,7 +80,14 @@ class Navigation extends Component {
       <Menu>
         <User>
           {({data: { me }}) => (
-            <p>{me ? <p>{me.name}</p> : ''}</p>
+            <p>{ me ? <Signout>{({signout}) => {
+              return (
+                <div>{me.name} - <button onClick={async () => {
+                  await signout();
+                  location.reload()
+                }}>Log out</button></div>
+              );
+            }}</Signout> : ''}</p>
           )}
         </User>
         {menuItems.map(item => (

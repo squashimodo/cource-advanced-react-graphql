@@ -26,6 +26,13 @@ type Mutation {
     password: String!
     name: String!
   ): User!
+
+  signin(
+    email: String!
+    password: String!
+  ) : User!
+
+  signout: Boolean
 }
 
 

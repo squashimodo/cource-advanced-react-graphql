@@ -5,7 +5,7 @@ const db = require('./db');
 const cookieParser = require('cookie-parser');
 const server = createServer();
 const jwt  = require('jsonwebtoken');
-server.express.use(cookieParser())
+server.express.use(cookieParser());
 // TODO use express middleware to populate current users
 server.express.use((req, res, next) => {
   const { token } = req.cookies;

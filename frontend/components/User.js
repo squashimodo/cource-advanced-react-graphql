@@ -26,4 +26,5 @@ User.propTypes = {
   children: PropTypes.func.isRequired
 }
 export { CURRENT_USER_QUERY };
+export { IsLoggedIn }
 export default User;

@@ -5,13 +5,13 @@ const Input = ({ title, type = 'text', propName, placeholder = '', value, onChan
   return (<label htmlFor={propName}>
     {title}
     <Tag
-      {...props}
       id={propName}
       type={type}
       name={propName}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      {...props}
     />
   </label>)
 }
