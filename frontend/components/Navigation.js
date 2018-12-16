@@ -84,7 +84,6 @@ class Navigation extends Component {
               return (
                 <div>{me.name} - <button onClick={async () => {
                   await signout();
-                  location.reload()
                 }}>Log out</button></div>
               );
             }}</Signout> : ''}</p>
