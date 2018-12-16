@@ -5,15 +5,27 @@ const { promisify } = require('util');
 const randomBytes = promisify(crypto.randomBytes);
 const { transport, makeANiceEmail } = require('../mail');
 
+const requireAuthenticated = function(fn) {
+  return async (parent, args, context, info) => {
+    if (!context.request.userId) throw new Error('NOO');
+    return fn(parent, args, context, info);
+  }
+}
+
 const Mutations = {
-  async createItem(parent, args, context, info) {
-    // TODO Check if logged in
+  createItem: requireAuthenticated(async(parent, args, context, info) => {
     return await context.db.mutation.createItem({
       data: {
+        // Create a relationship between the item and the user
+        user: {
+          connect: {
+            id: context.request.userId
+          }
+        },
         ...args
       }
     }, info);
-  },
+  }),
 
   async deleteItem(parent, args, context, info) {
     return await context.db.mutation.deleteItem({
