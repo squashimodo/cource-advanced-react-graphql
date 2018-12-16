@@ -36,7 +36,9 @@ const Mutations = {
   
   signout(parent, { email }, context, info) {
     context.response.clearCookie('token');
-    return true;
+    return {
+      message: 'Bye!'
+    };
   },
 
   async signin(parent, { email, password }, context, info) {

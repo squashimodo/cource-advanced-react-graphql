@@ -7,27 +7,35 @@ import Signout from './Logout';
 const menuItems = [
   {
     label: 'Take me home! 🏠',
-    href: '/'
+    href: '/',
+    requrieAuth: false
   },
   {
     label: 'Buy stuff 🤑',
-    href: '/items'
+    href: '/items',
+    requrieAuth: false
+
   },
   {
     label: 'Sell stuff 📈',
-    href: '/sell'
+    href: '/sell',
+    requireAuth: true
   },
   {
     label: 'Sign me up! ➕',
-    href: '/signup'
+    href: '/signup',
+    hideWhenLoggedIn: true,
+    requireAuth: false
   },
   {
     label: 'Orders 📝',
-    href: '/orders'
+    href: '/orders',
+    requireAuth: true
   },
   {
     label: 'Favorites 💖',
-    href: '/favorites'
+    href: '/favorites',
+    requireAuth: true
   },
 ];
 
@@ -80,22 +88,31 @@ class Navigation extends Component {
       <Menu>
         <User>
           {({data: { me }}) => (
-            <p>{ me ? <Signout>{({signout}) => {
+            <React.Fragment>
+            {me && <Signout>{({signout}) => {
               return (
-                <div>{me.name} - <button onClick={async () => {
+                <><MenuItem>{me.name}</MenuItem> <MenuItem><a href="#" onClick={async () => {
                   await signout();
-                }}>Log out</button></div>
+                }}>Log out</a></MenuItem></>
               );
-            }}</Signout> : ''}</p>
-          )}
-        </User>
-        {menuItems.map(item => (
+            }}</Signout>}
+        {menuItems.filter(item => {
+          if (me) {
+            if (item.hideWhenLoggedIn) return false;
+            if (item.requireAuth) return true
+          } else {
+            return item.requireAuth ? false : true
+          }
+        }).map(item => (
           <MenuItem key={`${item.href}${item.label}`}>
             <Link href={item.href}>
               <a>{item.label}</a>
             </Link>
           </MenuItem>
         ))}
+        </React.Fragment>
+        )}
+        </User>
       </Menu>
     );
   }
