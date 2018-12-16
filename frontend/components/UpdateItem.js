@@ -8,12 +8,12 @@ import Router from 'next/router';
 
 const GET_ITEM_QUERY = gql`
   query GET_ITEM_QUERY($id: ID!) {
-    item(where: {id: $id}) {
-      title,
+    item(where: { id: $id }) {
+      title
       description
       price
     }
-  } 
+  }
 `;
 
 const UPDATE_ITEM_MUTATION = gql`
@@ -41,14 +41,14 @@ const UPDATE_ITEM_MUTATION = gql`
 `;
 
 class UpdateItem extends Component {
-  state = {}
+  state = {};
 
   changeValue = e => {
     const { name, type, value } = e.target;
     this.setState({
-      [name]: type === 'number' ? parseFloat(value) : value
+      [name]: type === 'number' ? parseFloat(value) : value,
     });
-  }
+  };
 
   async submitForm(e, updateItemFn) {
     const { id } = this.props;
@@ -56,20 +56,20 @@ class UpdateItem extends Component {
     e.preventDefault();
 
     this.setState({
-      loadingMutation: true
-    })
-  
+      loadingMutation: true,
+    });
+
     try {
       const res = await updateItemFn({
         variables: {
           id,
-          ...this.state
-        }
+          ...this.state,
+        },
       });
 
       this.setState({
         loading: false,
-        error: null
+        error: null,
       });
 
       Router.push({
@@ -77,55 +77,64 @@ class UpdateItem extends Component {
         // query: {
         //   id: id
         // }
-      })
-    } catch(error) {
+      });
+    } catch (error) {
       this.setState({
         loading: false,
-        error: error
-      })
+        error: error,
+      });
     }
-  
   }
 
   render() {
     const { id, mutate } = this.props;
     return (
-      <Query query={GET_ITEM_QUERY} variables={{
-        id: id
-      }}>
-        {({loading: loadingQuery , data: { item }}) => {
+      <Query
+        query={GET_ITEM_QUERY}
+        variables={{
+          id: id,
+        }}>
+        {({ loading: loadingQuery, data: { item } }) => {
           if (loadingQuery) return <h1>Loading..</h1>;
           return (
-            <Form onSubmit={(e) => this.submitForm(e, mutate)}>
-              <ErrorMessage error={this.state.error}/>
-              <fieldset disabled={this.state.loadingMutation} aria-busy={this.state.loadingMutation}>
+            <Form onSubmit={e => this.submitForm(e, mutate)}>
+              <ErrorMessage error={this.state.error} />
+              <fieldset
+                disabled={this.state.loadingMutation}
+                aria-busy={this.state.loadingMutation}>
                 <Input
                   onChange={this.changeValue}
                   title="Title"
                   placeholder="Title"
                   defaultValue={item.title}
-                  propName="title" />
+                  propName="title"
+                />
                 <Input
                   type="number"
                   title="Price"
                   onChange={this.changeValue}
                   defaultValue={item.price}
-                  propName="price" />
+                  propName="price"
+                />
                 <Input
                   type="textarea"
                   onChange={this.changeValue}
                   title="Description"
                   placeholder="Description"
                   defaultValue={item.description}
-                  propName="description" />
+                  propName="description"
+                />
               </fieldset>
-              <button type="submit">{ this.state.loadingMutation ? 'Saving..' : 'Save item'}</button>
-            </Form>)
-          }}
+              <button type="submit">
+                {this.state.loadingMutation ? 'Saving..' : 'Save item'}
+              </button>
+            </Form>
+          );
+        }}
       </Query>
     );
   }
 }
 
-export default graphql(UPDATE_ITEM_MUTATION)(UpdateItem)
+export default graphql(UPDATE_ITEM_MUTATION)(UpdateItem);
 export { UPDATE_ITEM_MUTATION };

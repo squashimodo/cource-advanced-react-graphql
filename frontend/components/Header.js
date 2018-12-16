@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Nav from './Navigation';
 
 const floating = keyframes`
@@ -30,7 +30,7 @@ const Logo = styled.h1`
 
   a {
     padding: 0.5rem 1rem;
-    background: ${({theme}) => theme.orangeGradient};
+    background: ${({ theme }) => theme.orangeGradient};
     color: white;
     text-decoration: none;
     text-transform: uppercase;
@@ -43,9 +43,9 @@ const Logo = styled.h1`
 `;
 
 const StyledHeader = styled.header`
-  background: ${({theme}) => theme.blueGradient}}
+  background: ${({ theme }) => theme.blueGradient}}
   .bar {
-    border-bottom: 7px solid ${({theme}) => theme.black};
+    border-bottom: 7px solid ${({ theme }) => theme.black};
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
@@ -56,13 +56,13 @@ const StyledHeader = styled.header`
     }
   }
   .sub-bar {
-    border-bottom: 1px solid ${({theme}) => theme.offWhite}
+    border-bottom: 1px solid ${({ theme }) => theme.offWhite}
   }
 `;
 
 const Search = styled.input.attrs({
   type: 'text',
-  placeholder: 'What are you looking for?'
+  placeholder: 'What are you looking for?',
 })`
   width: 100%;
   padding: 10px;
@@ -74,14 +74,16 @@ const Header = () => {
     <StyledHeader>
       <div className="bar">
         <Logo>
-          <Link href="/"><a>Things for sale</a></Link>
+          <Link href="/">
+            <a>Things for sale</a>
+          </Link>
         </Logo>
-        <Nav></Nav>
+        <Nav />
       </div>
       <div className="sub-bar">
-        <Search></Search>
+        <Search />
       </div>
-      <div className="cart"></div>
+      <div className="cart" />
     </StyledHeader>
   );
 };

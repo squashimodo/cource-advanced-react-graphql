@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Meta from './Meta';
-import styled, { ThemeProvider, injectGlobal} from 'styled-components';
+import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
 const theme = {
   red: '#FF0000',
@@ -11,7 +11,8 @@ const theme = {
   offWhite: '#EDEDED',
   maxWidth: '1000px',
   bs: '0 12px 24px 0 rgba(0,0,0,.09)',
-  asphaltBackground: 'url("https://www.transparenttextures.com/patterns/asfalt-dark.png"), linear-gradient(-45deg, rgb(53,54,67), rgb(33,36,43))',
+  asphaltBackground:
+    'url("https://www.transparenttextures.com/patterns/asfalt-dark.png"), linear-gradient(-45deg, rgb(53,54,67), rgb(33,36,43))',
   blueGradient: 'linear-gradient(to right, #1e3c72, #2a5298)',
   orangeGradient: 'linear-gradient(-45deg, rgb(255,120,40), rgb(255,102,6))',
 };
@@ -51,11 +52,11 @@ injectGlobal`
 
 const StyledPage = styled.div`
   background: white;
-  color: ${({theme}) => theme.maxWidth};
+  color: ${({ theme }) => theme.maxWidth};
 `;
 
 const Inner = styled.div`
-  max-width: ${({theme}) => theme.maxWidth};
+  max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
   padding: 2rem;
 `;
@@ -68,9 +69,7 @@ class Page extends Component {
         <StyledPage>
           <Meta />
           <Header />
-          <Inner>
-            {children}
-          </Inner>
+          <Inner>{children}</Inner>
         </StyledPage>
       </ThemeProvider>
     );

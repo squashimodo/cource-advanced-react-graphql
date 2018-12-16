@@ -13,9 +13,15 @@ const SignupPage = props => {
   return (
     <Columns>
       <User>
-        {({data: {me}}) => (
-          !me ? <React.Fragment><Signup /><Signin /><RequestReset /></React.Fragment> : null 
-        )}
+        {({ data: { me } }) =>
+          !me ? (
+            <React.Fragment>
+              <Signup />
+              <Signin />
+              <RequestReset />
+            </React.Fragment>
+          ) : null
+        }
       </User>
     </Columns>
   );

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { Query,Mutation } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import ErrorMessage from './ErrorMessage';
 import Table from './styles/Table';
 import SickButton from './styles/SickButton';
 import PropTypes from 'prop-types';
 
-const ALL_PERMISSIONS = ['ADMIN', 'USER', 'ITEMCREATE', 'ITEMUPDATE', 'ITEMDELETE', 'PERMISSIONUPDATE'];
+const ALL_PERMISSIONS = [
+  'ADMIN',
+  'USER',
+  'ITEMCREATE',
+  'ITEMUPDATE',
+  'ITEMDELETE',
+  'PERMISSIONUPDATE',
+];
 
 const ALL_USERS_QUERY = gql`
   query ALL_USERS_QUERY {
@@ -58,7 +65,10 @@ const Permissions = () => {
 };
 
 const UPDATE_PERSMISSIONS_MUTATION = gql`
-  mutation UPDATE_PERSMISSIONS_MUTATION($permissions: [Permission], $userId: ID!) {
+  mutation UPDATE_PERSMISSIONS_MUTATION(
+    $permissions: [Permission]
+    $userId: ID!
+  ) {
     updatePermissions(userId: $userId, permissions: $permissions) {
       name
       id
@@ -74,60 +84,73 @@ class User extends Component {
       name: PropTypes.string,
       email: PropTypes.string,
       permissions: PropTypes.array,
-      id: PropTypes.string
-    }).isRequired
+      id: PropTypes.string,
+    }).isRequired,
   };
 
   state = {
-    permissions: this.props.user.permissions
+    permissions: this.props.user.permissions,
   };
 
   togglePermission(e) {
     const checkbox = e.target;
-    const updatedPermissions = checkbox.checked ? [...this.state.permissions, checkbox.name] : [...this.state.permissions].filter(p => p !== checkbox.name);
+    const updatedPermissions = checkbox.checked
+      ? [...this.state.permissions, checkbox.name]
+      : [...this.state.permissions].filter(p => p !== checkbox.name);
 
     this.setState({
       permissions: updatedPermissions,
-      isDirty: true
+      isDirty: true,
     });
   }
-
 
   render() {
     const { user } = this.props;
     return (
-      <Mutation mutation={UPDATE_PERSMISSIONS_MUTATION} variables={{
-        userId: user.id,
-        permissions: this.state.permissions
-      }} refetchQueries={[{query: ALL_USERS_QUERY}]}>
-        {(updatePermissions, {loading, error, called}) => {
-          
+      <Mutation
+        mutation={UPDATE_PERSMISSIONS_MUTATION}
+        variables={{
+          userId: user.id,
+          permissions: this.state.permissions,
+        }}
+        refetchQueries={[{ query: ALL_USERS_QUERY }]}>
+        {(updatePermissions, { loading, error, called }) => {
           /**
            * TODO: Add popups when error
            */
 
           return (
             <tr>
-            <td>{user.id}</td>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            {ALL_PERMISSIONS.map(permission => (
-              <td key={permission}>
-                <label htmlFor={`${user.id}-permission-${permission}`}>
-                  <input id={`${user.id}-permission-${permission}`} type="checkbox" name={permission} checked={this.state.permissions.includes(permission)} onChange={this.togglePermission.bind(this)} />
-                </label>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              {ALL_PERMISSIONS.map(permission => (
+                <td key={permission}>
+                  <label htmlFor={`${user.id}-permission-${permission}`}>
+                    <input
+                      id={`${user.id}-permission-${permission}`}
+                      type="checkbox"
+                      name={permission}
+                      checked={this.state.permissions.includes(permission)}
+                      onChange={this.togglePermission.bind(this)}
+                    />
+                  </label>
+                </td>
+              ))}
+              <td>
+                <SickButton
+                  onClick={async () => {
+                    await updatePermissions();
+                    this.setState({
+                      isDirty: false,
+                    });
+                  }}
+                  disabled={loading || !this.state.isDirty}>
+                  Updat{loading ? 'ing' : 'e'}
+                </SickButton>
               </td>
-            ))}
-            <td>
-              <SickButton onClick={async () => {
-                await updatePermissions();
-                this.setState({
-                  isDirty: false
-                })
-              }} disabled={loading || !this.state.isDirty}>Updat{loading ? 'ing' : 'e'}</SickButton>
-            </td>
-          </tr>
-          )
+            </tr>
+          );
         }}
       </Mutation>
     );

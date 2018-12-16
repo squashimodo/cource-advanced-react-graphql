@@ -6,7 +6,7 @@ import Head from 'next/head';
 const SingleItemStyles = styled.div`
   max-width: 1200px;
   margin: 2rem auto;
-  box-shadow ${({theme}) => theme.bs};
+  box-shadow ${({ theme }) => theme.bs};
 
   display: grid;
   grid-auto-columns: 1fr;
@@ -23,25 +23,23 @@ const SingleItemStyles = styled.div`
     margin: 3rem;
     font-size: 2rem;
   }
-`
+`;
 
 class SingleItem extends Component {
   render() {
-    const { item: {
-      id,
-      price,
-      title,
-      description,
-      largeImage
-    } } = this.props;
+    const {
+      item: { id, price, title, description, largeImage },
+    } = this.props;
     return (
       <SingleItemStyles>
         <Head>
           <title>Stuff! - {title}</title>
         </Head>
-        <img src={largeImage} alt={`Product picture of ${title}`}/>
+        <img src={largeImage} alt={`Product picture of ${title}`} />
         <div className="details">
-          <h2>{title} - {price} - {id}</h2>
+          <h2>
+            {title} - {price} - {id}
+          </h2>
           <h3>{description}</h3>
         </div>
       </SingleItemStyles>

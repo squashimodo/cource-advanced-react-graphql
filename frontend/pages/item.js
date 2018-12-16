@@ -13,25 +13,25 @@ const SINGLE_ITEM_QUERY = gql`
       price
       largeImage
     }
-  } 
+  }
 `;
 
 class Item extends Component {
   render() {
     const { id } = this.props.query;
     const variables = {
-      id
-    }
+      id,
+    };
     return (
       <div>
-          <Query query={SINGLE_ITEM_QUERY} variables={variables}>
-            {({data: { item }, loading, error}) => {
-              if (loading) return <h2>Loading..</h2>;
-              if (error) return <Error error={error}></Error>;
-              if (!item) return <p>No item found for id {id}</p>;
-              return <SingleItem item={item} />
-            }}
-          </Query>
+        <Query query={SINGLE_ITEM_QUERY} variables={variables}>
+          {({ data: { item }, loading, error }) => {
+            if (loading) return <h2>Loading..</h2>;
+            if (error) return <Error error={error} />;
+            if (!item) return <p>No item found for id {id}</p>;
+            return <SingleItem item={item} />;
+          }}
+        </Query>
       </div>
     );
   }

@@ -6,13 +6,15 @@ import React from 'react';
 const PromptSignin = props => {
   return (
     <Query query={CURRENT_USER_QUERY}>
-      {({data: {me}, loading}) => {
-        if (loading) return <p>Loading..</p>
+      {({ data: { me }, loading }) => {
+        if (loading) return <p>Loading..</p>;
         if (!me) {
-          return <>
-            <p>You have to be logged in to access this page</p>
-            <Signin />
-          </>
+          return (
+            <>
+              <p>You have to be logged in to access this page</p>
+              <Signin />
+            </>
+          );
         } else {
           return props.children;
         }

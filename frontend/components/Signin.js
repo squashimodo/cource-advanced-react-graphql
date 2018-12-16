@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Mutation} from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
@@ -16,32 +16,53 @@ const SIGNIN_MUTATION = gql`
 class Signin extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
   };
   changeProp = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
   render() {
     return (
-      <Mutation mutation={SIGNIN_MUTATION} variables={this.state} refetchQueries={[{query: CURRENT_USER_QUERY}]}>
-        {(signin, {error, loading}) => {
+      <Mutation
+        mutation={SIGNIN_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+        {(signin, { error, loading }) => {
           return (
-            <Form method="POST" onSubmit={async e => {
-              e.preventDefault();
-              await signin();
-              this.setState({
-                email: '',
-                password: ''
-              })
-            }}>
+            <Form
+              method="POST"
+              onSubmit={async e => {
+                e.preventDefault();
+                await signin();
+                this.setState({
+                  email: '',
+                  password: '',
+                });
+              }}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Signin!</h2>
-                <Error error={error}></Error>
-                <Input id="signinemail" title="Email" propName="email" placeholder="Email" type="email" value={this.state.email} onChange={this.changeProp} />
-                <Input id="signinpassword" title="Password" propName="password" placeholder="Password" type="password" value={this.state.password} onChange={this.changeProp} />
-                <button type='submit'>Sign in</button>
+                <Error error={error} />
+                <Input
+                  id="signinemail"
+                  title="Email"
+                  propName="email"
+                  placeholder="Email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.changeProp}
+                />
+                <Input
+                  id="signinpassword"
+                  title="Password"
+                  propName="password"
+                  placeholder="Password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.changeProp}
+                />
+                <button type="submit">Sign in</button>
               </fieldset>
             </Form>
           );

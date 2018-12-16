@@ -20,7 +20,7 @@ class Pagination extends Component {
     const page = this.props.page || 1;
     return (
       <Query query={ITEMS_CONNECTION_QUERY}>
-        {({data, loading, error}) => {
+        {({ data, loading, error }) => {
           if (loading) return <p>Loading..</p>;
           if (error) return <p>Error..</p>;
           const totalCount = data.itemsConnection.aggregate.count;
@@ -29,31 +29,39 @@ class Pagination extends Component {
           return (
             <PaginationStyles>
               <Head>
-                <title>Buy stuff - Page {page} of {pages}</title>
+                <title>
+                  Buy stuff - Page {page} of {pages}
+                </title>
               </Head>
-              <Link prefetch href={{
-                path: '/items',
-                query: {
-                  page: page-1,
-                }
-              }}>
+              <Link
+                prefetch
+                href={{
+                  path: '/items',
+                  query: {
+                    page: page - 1,
+                  },
+                }}>
                 <a className="prev" aria-disabled={page <= 1}>
-                  Previous page 
+                  Previous page
                 </a>
               </Link>
-               <p>Page {page} of {pages}</p> 
-              <Link prefetch href={{
-                path: '/items',
-                query: {
-                  page: page+1
-                }
-              }}>
+              <p>
+                Page {page} of {pages}
+              </p>
+              <Link
+                prefetch
+                href={{
+                  path: '/items',
+                  query: {
+                    page: page + 1,
+                  },
+                }}>
                 <a className="next" aria-disabled={page === pages}>
                   Next page
                 </a>
               </Link>
             </PaginationStyles>
-          )
+          );
         }}
       </Query>
     );

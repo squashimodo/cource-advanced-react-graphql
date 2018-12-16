@@ -11,7 +11,6 @@ import DeleteItem from './DeleteItem';
 
 export { DELETE_ITEM_MUTATION };
 
-
 const StyledItem = styled.div`
   position: relative;
   display: flex;
@@ -19,7 +18,7 @@ const StyledItem = styled.div`
   justify-content: space-between;
   height: 450px;
 
-  box-shadow: 1px 5px 12px 2px #0000000d;;
+  box-shadow: 1px 5px 12px 2px #0000000d;
   border-radius: 10px;
 
   font-family: RadnikaNext;
@@ -28,13 +27,13 @@ const StyledItem = styled.div`
     position: absolute;
     top: 190px;
     align-self: center;
-    background: ${({theme}) => theme.orangeGradient};
+    background: ${({ theme }) => theme.orangeGradient};
     color: white;
     font-family: RadnikaNext;
     padding: 5px 10px;
     margin-bottom: 30px;
     margin-top: -11px;
-    transform: rotate(${() => (Math.random() * 10)-5}deg);
+    transform: rotate(${() => Math.random() * 10 - 5}deg);
   }
 
   .item__description {
@@ -46,8 +45,8 @@ const StyledItem = styled.div`
     top: -5px;
     right: -1%;
     padding: 5px 10px;
-    background: ${({theme}) => theme.orangeGradient};
-    transform: rotate(${() => (Math.random() * 6)-3}deg);
+    background: ${({ theme }) => theme.orangeGradient};
+    transform: rotate(${() => Math.random() * 6 - 3}deg);
     color: white;
     font-family: RadnikaNext;
   }
@@ -67,7 +66,7 @@ const StyledItem = styled.div`
   }
 
   .item__image {
-    background-image: url(${(props) => props.image });
+    background-image: url(${props => props.image});
     background-size: cover;
     background-position: center center;
     height: 200px;
@@ -76,39 +75,44 @@ const StyledItem = styled.div`
 
 class Item extends Component {
   static propTypes = {
-    item: PropTypes.object.isRequired
-  }
+    item: PropTypes.object.isRequired,
+  };
 
   render() {
-    const { id, title, description, price, image } = this.props.item; 
+    const { id, title, description, price, image } = this.props.item;
     return (
       <StyledItem {...this.props.item} className="item">
-        <div className="item__title"><Link href={{
-          pathname: '/item',
-          query: {
-            id:  id
-          }
-        }} ><a>{title}</a></Link></div>
-        <div className="item__image"></div> 
+        <div className="item__title">
+          <Link
+            href={{
+              pathname: '/item',
+              query: {
+                id: id,
+              },
+            }}>
+            <a>{title}</a>
+          </Link>
+        </div>
+        <div className="item__image" />
         <div className="item__description">{description}</div>
         <div className="item__price">{formatCurrency(price)}</div>
         <div className="item__actions">
-          <Link href={{
-            pathname: 'update',
-            query: {
-              id: id
-            }
-          }}><a>Edit ✏️</a>
+          <Link
+            href={{
+              pathname: 'update',
+              query: {
+                id: id,
+              },
+            }}>
+            <a>Edit ✏️</a>
           </Link>
           <Link href="#">
             <a onClick={() => {}}>Add to 🛒</a>
           </Link>
-          <Link href="#" >
+          <Link href="#">
             <a onClick={() => {}}>Add to ❤️</a>
           </Link>
-          <DeleteItem id={id}>
-            Remove ☠️
-          </DeleteItem>
+          <DeleteItem id={id}>Remove ☠️</DeleteItem>
         </div>
       </StyledItem>
     );
