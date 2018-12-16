@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const { promisify } = require('util');
 const randomBytes = promisify(crypto.randomBytes);
 const { transport, makeANiceEmail } = require('../mail');
+const { hasPermission } = require('../utils');
 
 const requireAuthenticated = function(fn) {
   return async (parent, args, context, info) => {
@@ -176,7 +177,30 @@ const Mutations = {
     });
 
     return user;
-  }
+  },
+
+  updatePermissions: requireAuthenticated(async(parent, { permissions, userId }, context, info) => {
+    const user = await context.db.query.user({
+      where: {
+        id: userId
+      }
+    }, info);
+
+    if (!user) throw new Error('No user found');
+    
+    hasPermission(context.request.user, ['ADMIN', 'PERMISSIONUPDATE']);
+    
+    context.db.mutation.updateUser({
+      where: {
+        id: userId
+      },
+      data: {
+        permissions: {
+          set: permissions
+        }
+      }
+    })
+  })
 
 
 

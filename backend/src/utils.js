@@ -1,8 +1,8 @@
 function hasPermission(user, permissionsNeeded) {
-  const matchedPermissions = user.permissions.filter(permissionTheyHave =>
-    permissionsNeeded.includes(permissionTheyHave)
+  const matchesPermissions = user.permissions.some(permissionTheyHave => 
+    permissionsNeeded.some(p => p === permissionTheyHave)
   );
-  if (!matchedPermissions.length) {
+  if (!matchesPermissions) {
     throw new Error(`You do not have sufficient permissions
 
       : ${permissionsNeeded}

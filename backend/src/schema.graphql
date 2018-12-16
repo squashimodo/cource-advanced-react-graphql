@@ -47,6 +47,11 @@ type Mutation {
     password: String!
     resetToken: String!
   ): User!
+
+  updatePermissions(
+    permissions: [Permission]
+    userId: ID!  
+  ): User
 }
 
 
@@ -62,6 +67,7 @@ type Query {
   item(where: ItemWhereUniqueInput!): Item
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   me: User
+  users: [User]!
 }
 
 type User {
