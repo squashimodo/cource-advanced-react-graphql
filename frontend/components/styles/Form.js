@@ -49,10 +49,7 @@ const Form = styled.form`
   fieldset {
     border: 0;
     padding: 0;
-
-    &[disabled] {
-      opacity: 0.5;
-    }
+    
     &::before {
       height: 10px;
       content: '';
@@ -62,6 +59,12 @@ const Form = styled.form`
     &[aria-busy='true']::before {
       background-size: 50% auto;
       animation: ${loading} 0.5s linear infinite;
+    }
+  }
+
+  fieldset, input {
+    &[disabled] {
+      opacity: 0.5;
     }
   }
 `;
