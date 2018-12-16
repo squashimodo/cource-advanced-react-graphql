@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Input from './Input';
-
+import { CURRENT_USER_QUERY } from './User';
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
     signin(email: $email, password: $password) {
@@ -25,7 +25,7 @@ class Signin extends Component {
   };
   render() {
     return (
-      <Mutation mutation={SIGNIN_MUTATION} variables={this.state} >
+      <Mutation mutation={SIGNIN_MUTATION} variables={this.state} refetchQueries={[{query: CURRENT_USER_QUERY}]}>
         {(signin, {error, loading}) => {
           return (
             <Form method="POST" onSubmit={async e => {
@@ -35,7 +35,6 @@ class Signin extends Component {
                 email: '',
                 password: ''
               })
-              location.reload();
             }}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Signin!</h2>
