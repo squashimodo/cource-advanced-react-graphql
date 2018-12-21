@@ -3,13 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import formatCurrency from '../lib/formatMoney';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
-import { CREATE_ITEM_MUTATION } from './CreateItem';
-import Router from 'next/router';
 import DeleteItem from './DeleteItem';
-
-export { DELETE_ITEM_MUTATION };
+import AddToCart from './AddToCart';
 
 const StyledItem = styled.div`
   position: relative;
@@ -73,50 +68,60 @@ const StyledItem = styled.div`
   }
 `;
 
-class Item extends Component {
-  static propTypes = {
-    item: PropTypes.object.isRequired,
-  };
+const Item = props => {
+  const { item } = props;
+  const { id, title, description, price, image } = item;
+  return (
+    <StyledItem {...item} className="item">
+      <div className="item__title">
+        <Link
+          href={{
+            pathname: '/item',
+            query: {
+              id,
+            },
+          }}>
+          <a>{title}</a>
+        </Link>
+      </div>
+      <div className="item__image" />
+      <div className="item__description">{description}</div>
+      <div className="item__price">{formatCurrency(price)}</div>
+      <div className="item__actions">
+        <Link
+          href={{
+            pathname: 'update',
+            query: {
+              id,
+            },
+          }}>
+          <a>Edit ✏️</a>
+        </Link>
+        <AddToCart itemId={id}>
+          {addToCart =>
+            console.log(addToCart) || (
+              <button onClick={addToCart}>Add to 🛒</button>
+            )
+          }
+        </AddToCart>
 
-  render() {
-    const { id, title, description, price, image } = this.props.item;
-    return (
-      <StyledItem {...this.props.item} className="item">
-        <div className="item__title">
-          <Link
-            href={{
-              pathname: '/item',
-              query: {
-                id: id,
-              },
-            }}>
-            <a>{title}</a>
-          </Link>
-        </div>
-        <div className="item__image" />
-        <div className="item__description">{description}</div>
-        <div className="item__price">{formatCurrency(price)}</div>
-        <div className="item__actions">
-          <Link
-            href={{
-              pathname: 'update',
-              query: {
-                id: id,
-              },
-            }}>
-            <a>Edit ✏️</a>
-          </Link>
-          <Link href="#">
-            <a onClick={() => {}}>Add to 🛒</a>
-          </Link>
-          <Link href="#">
-            <a onClick={() => {}}>Add to ❤️</a>
-          </Link>
-          <DeleteItem id={id}>Remove ☠️</DeleteItem>
-        </div>
-      </StyledItem>
-    );
-  }
-}
+        <Link href="#">
+          <a onClick={() => {}}>Add to ❤️</a>
+        </Link>
+        <DeleteItem id={id}>Remove ☠️</DeleteItem>
+      </div>
+    </StyledItem>
+  );
+};
+
+Item.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string,
+  }).isRequired,
+};
 
 export default Item;

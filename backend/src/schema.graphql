@@ -52,6 +52,10 @@ type Mutation {
     permissions: [Permission]
     userId: ID!  
   ): User
+
+  addToCart(
+    id: ID!
+  ) : CartItem
 }
 
 
@@ -68,6 +72,7 @@ type Query {
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   me: User
   users: [User]!
+  cart: [CartItem!]!
 }
 
 type User {
