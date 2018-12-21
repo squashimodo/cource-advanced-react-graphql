@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 import Nav from './Navigation';
+import Cart from './Cart';
 
 const floating = keyframes`
   from {
@@ -83,7 +84,7 @@ const Header = () => {
       <div className="sub-bar">
         <Search />
       </div>
-      <div className="cart" />
+      <Cart />
     </StyledHeader>
   );
 };

@@ -5,6 +5,7 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Input from './Input';
 import { CURRENT_USER_QUERY } from './User';
+
 const RESET_PASSWORD_MUTATION = gql`
   mutation RESET_PASSWORD_MUTATION(
     $password: String!
@@ -29,11 +30,13 @@ class Reset extends Component {
     passwordConfirm: '',
     done: false,
   };
+
   changeProp = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
+
   render() {
     return (
       <Mutation
@@ -43,51 +46,49 @@ class Reset extends Component {
           resetToken: this.props.resetToken,
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
-        {(resetPassword, { error, loading }) => {
-          return (
-            <Form
-              method="POST"
-              onSubmit={async e => {
-                e.preventDefault();
-                await resetPassword();
-                this.setState({
-                  password: '',
-                  confirmPassword: '',
-                });
+        {(resetPassword, { error, loading }) => (
+          <Form
+            method="POST"
+            onSubmit={async e => {
+              e.preventDefault();
+              await resetPassword();
+              this.setState({
+                password: '',
+                confirmPassword: '',
+              });
 
-                this.props.onReset();
-              }}>
-              <fieldset disabled={loading} aria-busy={loading}>
-                <h2>Reset password</h2>
-                <Error error={error} />
-                <Input
-                  disabled={this.state.done}
-                  id="resetpw"
-                  title="Password"
-                  propName="password"
-                  placeholder="Password"
-                  type="password"
-                  onChange={this.changeProp}
-                />
-                <Input
-                  disabled={this.state.done}
-                  id="resetpwconfirm"
-                  title="Confirm Password"
-                  propName="confirmPassword"
-                  placeholder="Repeat password"
-                  type="password"
-                  onChange={this.changeProp}
-                />
-                <input
-                  type="button"
-                  disabled={this.state.done}
-                  type="submit"
-                  value="Reset password"
-                />
-              </fieldset>
-            </Form>
-          );
-        }}
+              this.props.onReset();
+            }}>
+            <fieldset disabled={loading} aria-busy={loading}>
+              <h2>Reset password</h2>
+              <Error error={error} />
+              <Input
+                disabled={this.state.done}
+                id="resetpw"
+                title="Password"
+                propName="password"
+                placeholder="Password"
+                type="password"
+                onChange={this.changeProp}
+              />
+              <Input
+                disabled={this.state.done}
+                id="resetpwconfirm"
+                title="Confirm Password"
+                propName="confirmPassword"
+                placeholder="Repeat password"
+                type="password"
+                onChange={this.changeProp}
+              />
+              <input
+                type="button"
+                disabled={this.state.done}
+                type="submit"
+                value="Reset password"
+              />
+            </fieldset>
+          </Form>
+        )}
       </Mutation>
     );
   }

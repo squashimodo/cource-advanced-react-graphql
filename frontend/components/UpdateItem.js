@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Input from './Input';
 import { Query, graphql } from 'react-apollo';
-import Form from './styles/Form';
 import gql from 'graphql-tag';
-import ErrorMessage from './ErrorMessage';
 import Router from 'next/router';
+import PropTypes from 'prop-types';
+import Input from './Input';
+import Form from './styles/Form';
+import ErrorMessage from './ErrorMessage';
 
 const GET_ITEM_QUERY = gql`
   query GET_ITEM_QUERY($id: ID!) {
@@ -60,7 +61,7 @@ class UpdateItem extends Component {
     });
 
     try {
-      const res = await updateItemFn({
+      await updateItemFn({
         variables: {
           id,
           ...this.state,
@@ -81,27 +82,26 @@ class UpdateItem extends Component {
     } catch (error) {
       this.setState({
         loading: false,
-        error: error,
+        error,
       });
     }
   }
 
   render() {
-    const { id, mutate } = this.props;
+    const { id, updateItem } = this.props;
+    const { loadingMutation, error } = this.state;
     return (
       <Query
         query={GET_ITEM_QUERY}
         variables={{
-          id: id,
+          id,
         }}>
         {({ loading: loadingQuery, data: { item } }) => {
           if (loadingQuery) return <h1>Loading..</h1>;
           return (
-            <Form onSubmit={e => this.submitForm(e, mutate)}>
-              <ErrorMessage error={this.state.error} />
-              <fieldset
-                disabled={this.state.loadingMutation}
-                aria-busy={this.state.loadingMutation}>
+            <Form onSubmit={e => this.submitForm(e, updateItem)}>
+              <ErrorMessage error={error} />
+              <fieldset disabled={loadingMutation} aria-busy={loadingMutation}>
                 <Input
                   onChange={this.changeValue}
                   title="Title"
@@ -126,7 +126,7 @@ class UpdateItem extends Component {
                 />
               </fieldset>
               <button type="submit">
-                {this.state.loadingMutation ? 'Saving..' : 'Save item'}
+                {loadingMutation ? 'Saving..' : 'Save item'}
               </button>
             </Form>
           );
@@ -136,5 +136,12 @@ class UpdateItem extends Component {
   }
 }
 
-export default graphql(UPDATE_ITEM_MUTATION)(UpdateItem);
+UpdateItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  updateItem: PropTypes.func.isRequired,
+};
+
+export default graphql(UPDATE_ITEM_MUTATION, {
+  name: 'updateItem',
+})(UpdateItem);
 export { UPDATE_ITEM_MUTATION };

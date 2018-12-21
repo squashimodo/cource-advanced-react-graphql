@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import Link from './Link';
 import styled from 'styled-components';
+import Link from './Link';
 import User from './User';
 import Signout from './Logout';
+import Cart from './Cart';
+import ToggleCart from './ToggleCart';
 
 const menuItems = [
   {
@@ -92,22 +94,20 @@ class Navigation extends Component {
             <React.Fragment>
               {me && (
                 <Signout>
-                  {({ signout }) => {
-                    return (
-                      <>
-                        <MenuItem>{me.name}</MenuItem>{' '}
-                        <MenuItem>
-                          <a
-                            href="#"
-                            onClick={async () => {
-                              await signout();
-                            }}>
-                            Log out
-                          </a>
-                        </MenuItem>
-                      </>
-                    );
-                  }}
+                  {({ signout }) => (
+                    <>
+                      <MenuItem>{me.name}</MenuItem>{' '}
+                      <MenuItem>
+                        <a
+                          href="#"
+                          onClick={async () => {
+                            await signout();
+                          }}>
+                          Log out
+                        </a>
+                      </MenuItem>
+                    </>
+                  )}
                 </Signout>
               )}
               {menuItems
@@ -116,7 +116,7 @@ class Navigation extends Component {
                     if (item.hideWhenLoggedIn) return false;
                     if (item.requireAuth) return true;
                   } else {
-                    return item.requireAuth ? false : true;
+                    return !item.requireAuth;
                   }
                 })
                 .map(item => (
@@ -126,6 +126,13 @@ class Navigation extends Component {
                     </Link>
                   </MenuItem>
                 ))}
+              <ToggleCart>
+                {toggleCart => (
+                  <MenuItem type="button" onClick={toggleCart}>
+                    <a>Toggle!</a>
+                  </MenuItem>
+                )}
+              </ToggleCart>
             </React.Fragment>
           )}
         </User>
