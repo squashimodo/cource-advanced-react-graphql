@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import Input from './Input';
 import Form from './styles/Form';
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from './ErrorMessage';
 
 const CREATE_ITEM_MUTATION = gql`
   # The CREATE_ITEM_MUTATION will take a set of parameters

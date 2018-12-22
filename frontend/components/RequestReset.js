@@ -32,13 +32,13 @@ class Signin extends Component {
           <Form
             method="POST"
             onSubmit={async e => {
-                e.preventDefault();
-                await requestReset();
-                this.setState({
-                  email: '',
-                  done: true,
-                });
-              }}
+              e.preventDefault();
+              await requestReset();
+              this.setState({
+                email: '',
+                done: true,
+              });
+            }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Reset password</h2>
@@ -62,7 +62,7 @@ class Signin extends Component {
               />
             </fieldset>
           </Form>
-          )}
+        )}
       </Mutation>
     );
   }

@@ -48,9 +48,9 @@ const CartItem = ({
     <RemoveFromCart id={id}>
       {removeFromCart => (
         <BigButton onClick={removeFromCart}>&times;</BigButton>
-        )}
+      )}
     </RemoveFromCart>
   </CartItemStyles>
-  );
+);
 
 export default CartItem;

@@ -18,6 +18,6 @@ const Logout = props => (
   >
     {signout => props.children({ ...props, signout })}
   </Mutation>
-  );
+);
 
 export default Logout;
