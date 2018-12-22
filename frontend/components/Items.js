@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import Item from './Item';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Item from './Item';
 import Pagination from './Pagination';
+
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
     items(skip: $skip, first: $first) {
@@ -38,7 +40,8 @@ export default class Items extends Component {
         query={ALL_ITEMS_QUERY}
         variables={{
           skip: page * 4 - 4,
-        }}>
+        }}
+      >
         {({ loading, error, data }) => {
           if (loading) return 'Loading..';
           if (error) return `Error! ${error.message}`;

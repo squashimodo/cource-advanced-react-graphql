@@ -70,23 +70,21 @@ const Search = styled.input.attrs({
   font-size: rem;
 `;
 
-const Header = () => {
-  return (
-    <StyledHeader>
-      <div className="bar">
-        <Logo>
-          <Link href="/">
-            <a>Things for sale</a>
-          </Link>
-        </Logo>
-        <Nav />
-      </div>
-      <div className="sub-bar">
-        <Search />
-      </div>
-      <Cart />
-    </StyledHeader>
+const Header = () => (
+  <StyledHeader>
+    <div className="bar">
+      <Logo>
+        <Link href="/">
+          <a>Things for sale</a>
+        </Link>
+      </Logo>
+      <Nav />
+    </div>
+    <div className="sub-bar">
+      <Search />
+    </div>
+    <Cart />
+  </StyledHeader>
   );
-};
 
 export default Header;

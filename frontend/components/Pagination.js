@@ -37,7 +37,8 @@ const Pagination = ({ page }) => (
               query: {
                 page: page - 1,
               },
-            }}>
+            }}
+          >
             <a className="prev" aria-disabled={page <= 1}>
               Previous page
             </a>
@@ -52,7 +53,8 @@ const Pagination = ({ page }) => (
               query: {
                 page: page + 1,
               },
-            }}>
+            }}
+          >
             <a className="next" aria-disabled={page === pages}>
               Next page
             </a>

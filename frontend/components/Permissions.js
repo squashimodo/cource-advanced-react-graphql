@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Query, Mutation } from 'react-apollo';
+import { Mutation, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 import ErrorMessage from './ErrorMessage';
 import Table from './styles/Table';
 import SickButton from './styles/SickButton';
-import PropTypes from 'prop-types';
 
 const ALL_PERMISSIONS = [
   'ADMIN',
@@ -26,41 +26,33 @@ const ALL_USERS_QUERY = gql`
   }
 `;
 
-const Permissions = () => {
-  return (
-    <Query query={ALL_USERS_QUERY}>
-      {({ data, loading, error }) => {
-        if (loading) return <p>Loading</p>;
+const Permissions = ({ data, loading, error }) => {
+  if (loading) return <p>Loading</p>;
 
-        return (
-          console.log(data.users) || (
-            <div>
-              <ErrorMessage error={error} />
-              <div>
-                <h2>Handle permissions</h2>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      {ALL_PERMISSIONS.map(p => (
-                        <th key={p}>{p}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.users.map(user => (
-                      <User key={user.id} user={user} />
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
-            </div>
-          )
-        );
-      }}
-    </Query>
+  return (
+    <div>
+      <ErrorMessage error={error} />
+      <div>
+        <h2>Handle permissions</h2>
+        <Table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              {ALL_PERMISSIONS.map(p => (
+                <th key={p}>{p}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.users.map(user => (
+              <User key={user.id} user={user} />
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    </div>
   );
 };
 
@@ -94,9 +86,10 @@ class User extends Component {
 
   togglePermission(e) {
     const checkbox = e.target;
+    const { permissions } = this.state;
     const updatedPermissions = checkbox.checked
-      ? [...this.state.permissions, checkbox.name]
-      : [...this.state.permissions].filter(p => p !== checkbox.name);
+      ? [...permissions, checkbox.name]
+      : [...permissions].filter(p => p !== checkbox.name);
 
     this.setState({
       permissions: updatedPermissions,
@@ -106,55 +99,55 @@ class User extends Component {
 
   render() {
     const { user } = this.props;
+    const { permissions, isDirty } = this.state;
     return (
       <Mutation
         mutation={UPDATE_PERSMISSIONS_MUTATION}
         variables={{
           userId: user.id,
-          permissions: this.state.permissions,
+          permissions,
         }}
-        refetchQueries={[{ query: ALL_USERS_QUERY }]}>
-        {(updatePermissions, { loading, error, called }) => {
+        refetchQueries={[{ query: ALL_USERS_QUERY }]}
+      >
+        {(updatePermissions, { loading, error, called }) => (
           /**
            * TODO: Add popups when error
            */
-
-          return (
-            <tr>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              {ALL_PERMISSIONS.map(permission => (
-                <td key={permission}>
-                  <label htmlFor={`${user.id}-permission-${permission}`}>
-                    <input
-                      id={`${user.id}-permission-${permission}`}
-                      type="checkbox"
-                      name={permission}
-                      checked={this.state.permissions.includes(permission)}
-                      onChange={this.togglePermission.bind(this)}
-                    />
-                  </label>
-                </td>
-              ))}
-              <td>
-                <SickButton
-                  onClick={async () => {
-                    await updatePermissions();
-                    this.setState({
-                      isDirty: false,
-                    });
-                  }}
-                  disabled={loading || !this.state.isDirty}>
-                  Updat{loading ? 'ing' : 'e'}
-                </SickButton>
+          <tr>
+            <td>{user.id}</td>
+            <td>{user.name}</td>
+            <td>{user.email}</td>
+            {ALL_PERMISSIONS.map(permission => (
+              <td key={permission}>
+                <label htmlFor={`${user.id}-permission-${permission}`}>
+                  <input
+                    id={`${user.id}-permission-${permission}`}
+                    type="checkbox"
+                    name={permission}
+                    checked={permissions.includes(permission)}
+                    onChange={this.togglePermission.bind(this)}
+                  />
+                </label>
               </td>
-            </tr>
-          );
-        }}
+            ))}
+            <td>
+              <SickButton
+                onClick={async () => {
+                  await updatePermissions();
+                  this.setState({
+                    isDirty: false,
+                  });
+                }}
+                disabled={loading || !isDirty}
+              >
+                Updat{loading ? 'ing' : 'e'}
+              </SickButton>
+            </td>
+          </tr>
+        )}
       </Mutation>
     );
   }
 }
 
-export default Permissions;
+export default graphql(ALL_USERS_QUERY)(Permissions);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { ALL_ITEMS_QUERY } from './Items';
@@ -37,12 +38,13 @@ class DeleteItem extends Component {
   };
 
   render() {
-    const { id } = this.props;
+    const { id, children } = this.props;
     return (
       <Mutation
         mutation={DELETE_ITEM_MUTATION}
-        variables={{ id: id }}
-        update={this.update}>
+        variables={{ id }}
+        update={this.update}
+      >
         {(deleteItem, { loading }) => (
           <Link href="#">
             <StyledLink
@@ -62,8 +64,9 @@ class DeleteItem extends Component {
                     })
                     .catch(e => alert(e.message));
                 }
-              }}>
-              {this.props.children}
+              }}
+            >
+              {children}
             </StyledLink>
           </Link>
         )}
@@ -71,5 +74,10 @@ class DeleteItem extends Component {
     );
   }
 }
+
+DeleteItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  children: PropTypes.func.isRequired,
+};
 
 export default DeleteItem;

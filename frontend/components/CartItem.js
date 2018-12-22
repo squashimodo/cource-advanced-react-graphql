@@ -33,26 +33,24 @@ const CartItem = ({
     quantity,
     item: { title, description, price, image },
   },
-}) => {
-  return (
-    <CartItemStyles>
-      <img src={image} width={100} alt={title} />
-      <div className="cart-item-details">
-        <h3>{title}</h3>
-        <p>
-          {formatMoney(quantity * price)} -{' '}
-          <em>
-            {quantity} &times; {formatMoney(price)} each
-          </em>
-        </p>
-      </div>
-      <RemoveFromCart id={id}>
-        {removeFromCart => (
-          <BigButton onClick={removeFromCart}>&times;</BigButton>
+}) => (
+  <CartItemStyles>
+    <img src={image} width={100} alt={title} />
+    <div className="cart-item-details">
+      <h3>{title}</h3>
+      <p>
+        {formatMoney(quantity * price)} -{' '}
+        <em>
+          {quantity} &times; {formatMoney(price)} each
+        </em>
+      </p>
+    </div>
+    <RemoveFromCart id={id}>
+      {removeFromCart => (
+        <BigButton onClick={removeFromCart}>&times;</BigButton>
         )}
-      </RemoveFromCart>
-    </CartItemStyles>
+    </RemoveFromCart>
+  </CartItemStyles>
   );
-};
 
 export default CartItem;

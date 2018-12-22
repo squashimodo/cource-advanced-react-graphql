@@ -45,7 +45,8 @@ class Reset extends Component {
           ...this.state,
           resetToken: this.props.resetToken,
         }}
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
         {(resetPassword, { error, loading }) => (
           <Form
             method="POST"
@@ -58,7 +59,8 @@ class Reset extends Component {
               });
 
               this.props.onReset();
-            }}>
+            }}
+          >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Reset password</h2>
               <Error error={error} />

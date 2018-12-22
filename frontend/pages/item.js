@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SingleItem from '../components/SingleItem';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import SingleItem from '../components/SingleItem';
 import Error from '../components/ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`

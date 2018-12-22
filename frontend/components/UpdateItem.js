@@ -95,7 +95,8 @@ class UpdateItem extends Component {
         query={GET_ITEM_QUERY}
         variables={{
           id,
-        }}>
+        }}
+      >
         {({ loading: loadingQuery, data: { item } }) => {
           if (loadingQuery) return <h1>Loading..</h1>;
           return (

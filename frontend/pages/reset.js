@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Reset from '../components/reset';
 import { withRouter } from 'next/router';
+import Reset from '../components/reset';
 
 class ResetPage extends Component {
   onReset = () => {
     this.props.router.push('/');
   };
+
   render() {
     const { router, ...props } = this.props;
     if (!props.query.resetToken) {

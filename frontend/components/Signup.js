@@ -45,7 +45,8 @@ class Signup extends Component {
                 email: '',
                 password: '',
               });
-            }}>
+            }}
+          >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Signup!</h2>
               <Error error={error} />

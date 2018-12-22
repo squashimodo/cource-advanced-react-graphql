@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Input from './Input';
 import { graphql } from 'react-apollo';
-import Form from './styles/Form';
 import gql from 'graphql-tag';
-import ErrorMessage from '../components/ErrorMessage';
 import Router from 'next/router';
+import Input from './Input';
+import Form from './styles/Form';
+import ErrorMessage from "./ErrorMessage";
 
 const CREATE_ITEM_MUTATION = gql`
   # The CREATE_ITEM_MUTATION will take a set of parameters
@@ -116,7 +116,8 @@ class CreateItem extends Component {
               error: e,
             });
           }
-        }}>
+        }}
+      >
         <ErrorMessage error={error} />
         <fieldset loading={loading} aria-loading={loading}>
           <Input
@@ -155,7 +156,7 @@ class CreateItem extends Component {
   }
 }
 
-//export default CreateItem;
+// export default CreateItem;
 export default graphql(CREATE_ITEM_MUTATION, {
   name: 'createItem',
 })(CreateItem);

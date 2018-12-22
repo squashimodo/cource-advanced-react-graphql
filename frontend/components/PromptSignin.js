@@ -1,12 +1,11 @@
 import { Query } from 'react-apollo';
+import React from 'react';
 import { CURRENT_USER_QUERY } from './User';
 import Signin from './Signin';
-import React from 'react';
 
-const PromptSignin = props => {
-  return (
-    <Query query={CURRENT_USER_QUERY}>
-      {({ data: { me }, loading }) => {
+const PromptSignin = props => (
+  <Query query={CURRENT_USER_QUERY}>
+    {({ data: { me }, loading }) => {
         if (loading) return <p>Loading..</p>;
         if (!me) {
           return (
@@ -15,12 +14,11 @@ const PromptSignin = props => {
               <Signin />
             </>
           );
-        } else {
+        } 
           return props.children;
-        }
+        
       }}
-    </Query>
+  </Query>
   );
-};
 
 export default PromptSignin;

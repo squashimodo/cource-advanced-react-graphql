@@ -102,7 +102,8 @@ class Navigation extends Component {
                           href="#"
                           onClick={async () => {
                             await signout();
-                          }}>
+                          }}
+                        >
                           Log out
                         </a>
                       </MenuItem>

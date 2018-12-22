@@ -32,7 +32,8 @@ class Signin extends Component {
       <Mutation
         mutation={SIGNIN_MUTATION}
         variables={this.state}
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+      >
         {(signin, { error, loading }) => (
           <Form
             method="POST"
@@ -43,7 +44,8 @@ class Signin extends Component {
                 email: '',
                 password: '',
               });
-            }}>
+            }}
+          >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Signin!</h2>
               <Error error={error} />

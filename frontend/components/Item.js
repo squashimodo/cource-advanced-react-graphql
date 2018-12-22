@@ -81,7 +81,8 @@ const Item = props => {
             query: {
               id,
             },
-          }}>
+          }}
+        >
           <a>{title}</a>
         </Link>
       </div>
@@ -95,7 +96,8 @@ const Item = props => {
             query: {
               id,
             },
-          }}>
+          }}
+        >
           <a>Edit ✏️</a>
         </Link>
         <AddToCart itemId={id}>
