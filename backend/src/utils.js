@@ -1,5 +1,5 @@
 function hasPermission(user, permissionsNeeded) {
-  const matchesPermissions = user.permissions.some(permissionTheyHave => 
+  const matchesPermissions = user.permissions.some(permissionTheyHave =>
     permissionsNeeded.some(p => p === permissionTheyHave)
   );
   if (!matchesPermissions) {

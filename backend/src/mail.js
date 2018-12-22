@@ -6,8 +6,8 @@ var transport = nodemailer.createTransport({
   port: MAIL_PORT,
   auth: {
     user: MAIL_USER,
-    pass: MAIL_PASS
-  }
+    pass: MAIL_PASS,
+  },
 });
 
 const makeANiceEmail = text => `
