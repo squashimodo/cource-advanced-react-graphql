@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import User from './User';
 import formatCurrency from '../lib/formatMoney';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
@@ -98,11 +99,14 @@ const Item = props => {
           <a>Edit ✏️</a>
         </Link>
         <AddToCart itemId={id}>
-          {addToCart =>
-            console.log(addToCart) || (
-              <button onClick={addToCart}>Add to 🛒</button>
-            )
-          }
+          {({ addToCart }) => (
+            <button type="button" onClick={addToCart}>
+              Add to
+              <span role="img" aria-label="Shoppingcart">
+                🛒
+              </span>
+            </button>
+          )}
         </AddToCart>
 
         <Link href="#">

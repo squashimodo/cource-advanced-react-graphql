@@ -218,7 +218,7 @@ const Mutations = {
         }
       }
     });
-    console.log('LOOL', existingCartItem);
+
     if (existingCartItem) {
       return context.db.mutation.updateCartItem({
         where: {
@@ -245,6 +245,24 @@ const Mutations = {
         }
       }, info)
     }
+  }),
+  
+  removeFromCart: requireAuthenticated(async (parent, args, context, info) => {
+    const  cartItem  = await context.db.query.cartItem({
+      where: {
+        id: args.id
+      }
+    }, ` { id, user { id }}`);
+
+    if (!cartItem) throw new Error('No item found');
+
+    if (cartItem.user.id !== context.request.userId) throw new Error('Not da owner');
+
+    return context.db.mutation.deleteCartItem({
+      where: {
+        id: args.id
+      }
+    }, info);
   })
 
 
