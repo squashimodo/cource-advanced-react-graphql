@@ -22,8 +22,9 @@ export const TOGGLE_CART_MUTATION = gql`
     toggleCart @client
   }
 `;
-const Cart = ({ cart, userName, open, toggleCart, ...props }) =>
-  console.log(props) || (
+const Cart = ({ cart, userName, open, toggleCart, ...props }) => {
+  if (!cart || !userName) return <></>;
+  return (
     <CartStyles open={open}>
       <header>
         <CloseButton onClick={toggleCart} title="close">
@@ -42,6 +43,7 @@ const Cart = ({ cart, userName, open, toggleCart, ...props }) =>
       </footer>
     </CartStyles>
   );
+};
 
 Cart.propTypes = {
   open: PropTypes.bool,
@@ -65,9 +67,9 @@ export default compose(
     name: 'toggleCart',
   }),
   graphql(CURRENT_USER_QUERY, {
-    props: ({ data: { me } }) => ({
-      userName: me.name,
-      cart: me.cart,
+    props: ({ data }) => ({
+      userName: data.me ? data.me.name : '',
+      cart: data.me ? data.me.cart : [],
     }),
   })
 )(Cart);

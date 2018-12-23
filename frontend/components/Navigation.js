@@ -23,7 +23,7 @@ const menuItems = [
     requireAuth: true,
   },
   {
-    label: 'Sign me up! ➕',
+    label: 'Login / Sign up! ➕',
     href: '/signup',
     hideWhenLoggedIn: true,
     requireAuth: false,
@@ -123,17 +123,19 @@ class Navigation extends Component {
                 .map(item => (
                   <MenuItem key={`${item.href}${item.label}`}>
                     <Link href={item.href}>
-                      <a>{item.label}</a>
+                      <a href="#">{item.label}</a>
                     </Link>
                   </MenuItem>
                 ))}
-              <ToggleCart>
-                {toggleCart => (
-                  <MenuItem type="button" onClick={toggleCart}>
-                    <a>Toggle!</a>
-                  </MenuItem>
-                )}
-              </ToggleCart>
+              {me && (
+                <ToggleCart>
+                  {toggleCart => (
+                    <MenuItem type="button" onClick={toggleCart}>
+                      <a href="#">Shopping cart</a>
+                    </MenuItem>
+                  )}
+                </ToggleCart>
+              )}
             </React.Fragment>
           )}
         </User>

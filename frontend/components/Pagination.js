@@ -21,7 +21,7 @@ const Pagination = ({ page }) => (
       if (loading) return <p>Loading..</p>;
       if (error) return <p>Error..</p>;
       const totalCount = data.itemsConnection.aggregate.count;
-      const pages = Math.ceil(totalCount / 4);
+      const pages = Math.ceil(totalCount / 8);
 
       return (
         <PaginationStyles>

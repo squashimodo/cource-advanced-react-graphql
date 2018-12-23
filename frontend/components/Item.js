@@ -111,7 +111,7 @@ const Item = props => {
           )}
         </AddToCart>
 
-        <Link href="#">
+        <Link href="/">
           <a onClick={() => {}}>Add to ❤️</a>
         </Link>
         <DeleteItem id={id}>Remove ☠️</DeleteItem>

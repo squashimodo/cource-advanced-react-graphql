@@ -7,7 +7,7 @@ import Item from './Item';
 import Pagination from './Pagination';
 
 const ALL_ITEMS_QUERY = gql`
-  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
+  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 8) {
     items(skip: $skip, first: $first) {
       id
       title
@@ -39,7 +39,7 @@ export default class Items extends Component {
       <Query
         query={ALL_ITEMS_QUERY}
         variables={{
-          skip: page * 4 - 4,
+          skip: page * 8 - 8,
         }}
       >
         {({ loading, error, data }) => {
