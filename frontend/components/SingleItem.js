@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Head from 'next/head';
+import { ItemPropTypes } from '../lib/propTypes';
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
@@ -46,13 +46,7 @@ const SingleItem = props => {
 };
 
 SingleItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string,
-    price: PropTypes.number,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    largeImage: PropTypes.string,
-  }).isRequired,
+  item: ItemPropTypes.isRequired,
 };
 
 export default SingleItem;

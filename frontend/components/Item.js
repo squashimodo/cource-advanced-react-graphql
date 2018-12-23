@@ -100,7 +100,7 @@ const Item = props => {
         >
           <a>Edit ✏️</a>
         </Link>
-        <AddToCart itemId={id}>
+        <AddToCart item={item}>
           {({ addToCart }) => (
             <button type="button" onClick={addToCart}>
               Add to
