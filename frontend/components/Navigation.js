@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Link from './Link';
 import User from './User';
 import Signout from './Logout';
-import Cart from './Cart';
 import ToggleCart from './ToggleCart';
+import CartCount from './CartCount';
 
 const menuItems = [
   {
@@ -130,9 +130,19 @@ class Navigation extends Component {
               {me && (
                 <ToggleCart>
                   {toggleCart => (
-                    <MenuItem type="button" onClick={toggleCart}>
-                      <a href="#">Shopping cart</a>
-                    </MenuItem>
+                    <>
+                      <MenuItem type="button" onClick={toggleCart}>
+                        <a href="#">Shopping cart</a>
+                      </MenuItem>
+                      <span>
+                        <CartCount
+                          count={me.cart.reduce(
+                            (total, cartItem) => total + cartItem.quantity,
+                            0
+                          )}
+                        />
+                      </span>
+                    </>
                   )}
                 </ToggleCart>
               )}
