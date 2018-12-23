@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { ALL_ITEMS_QUERY } from './Items';
+import { CURRENT_USER_QUERY } from './User';
 
 const StyledLink = styled('a')`
   text-decoration: ${({ loading }) => (loading ? 'line-through' : '')};
@@ -42,6 +43,7 @@ class DeleteItem extends Component {
     return (
       <Mutation
         mutation={DELETE_ITEM_MUTATION}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
         variables={{ id }}
         update={this.update}
       >

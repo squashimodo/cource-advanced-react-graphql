@@ -46,7 +46,7 @@ const Mutations = {
       ['ADMIN', 'ITEMDELETE'].includes(p)
     );
 
-    if (!ownsItem && hasPermission)
+    if (!ownsItem && !hasPermission)
       throw new Error('You dont have permissions to do this');
     return await context.db.mutation.deleteItem({
       where: {

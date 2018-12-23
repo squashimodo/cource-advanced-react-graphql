@@ -27,30 +27,36 @@ const CartItemStyles = styled.li`
     margin: 0;
   }
 `;
-const CartItem = ({
-  cartItem: {
-    id,
-    quantity,
-    item: { title, description, price, image },
-  },
-}) => (
-  <CartItemStyles>
-    <img src={image} width={100} alt={title} />
-    <div className="cart-item-details">
-      <h3>{title}</h3>
-      <p>
-        {formatMoney(quantity * price)} -{' '}
-        <em>
-          {quantity} &times; {formatMoney(price)} each
-        </em>
-      </p>
-    </div>
-    <RemoveFromCart id={id}>
-      {removeFromCart => (
-        <BigButton onClick={removeFromCart}>&times;</BigButton>
-      )}
-    </RemoveFromCart>
-  </CartItemStyles>
-);
+const CartItem = ({ cartItem: { id, quantity, item } }) =>
+  item ? (
+    <CartItemStyles>
+      <img src={item.image} width={100} alt={item.title} />
+      <div className="cart-item-details">
+        <h3>{item.title}</h3>
+        <p>
+          {formatMoney(quantity * item.price)} -{' '}
+          <em>
+            {quantity} &times; {formatMoney(item.price)} each
+          </em>
+        </p>
+      </div>
+      <RemoveFromCart id={id}>
+        {removeFromCart => (
+          <BigButton onClick={removeFromCart}>&times;</BigButton>
+        )}
+      </RemoveFromCart>
+    </CartItemStyles>
+  ) : (
+    <CartItemStyles>
+      <div className="cart-item-details">
+        This item is no longer available in the store :({' '}
+        <RemoveFromCart id={id}>
+          {removeFromCart => (
+            <BigButton onClick={removeFromCart}>Remove from cart</BigButton>
+          )}
+        </RemoveFromCart>
+      </div>
+    </CartItemStyles>
+  );
 
 export default CartItem;
