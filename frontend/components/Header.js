@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 import Nav from './Navigation';
 import Cart from './Cart';
+import AutoComplete from './Search';
 
 const floating = keyframes`
   from {
@@ -81,7 +82,7 @@ const Header = () => (
       <Nav />
     </div>
     <div className="sub-bar">
-      <Search />
+      <AutoComplete />
     </div>
     <Cart />
   </StyledHeader>

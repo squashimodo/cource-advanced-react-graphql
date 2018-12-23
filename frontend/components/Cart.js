@@ -52,7 +52,7 @@ Cart.propTypes = {
 };
 
 Cart.defaultProps = {
-  open: true,
+  open: false,
   toggleCart() {},
 };
 
