@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
 
-const INSERT_CART_ITEM_MUTATION = gql`
+export const INSERT_CART_ITEM_MUTATION = gql`
   mutation INSERT_CART_ITEM_MUTATION($id: ID!) {
     addToCart(id: $id) {
       id
