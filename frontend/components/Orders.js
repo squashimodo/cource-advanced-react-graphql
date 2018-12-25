@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import Error from './ErrorMessage';
 import gql from 'graphql-tag';
-import PromptSignin from './PromptSignin';
 import Link from 'next/link';
 import styled from 'styled-components';
-import OrderItemStyles from './styles/OrderItemStyles';
 import { formatDistance } from 'date-fns';
+import OrderItemStyles from './styles/OrderItemStyles';
+import PromptSignin from './PromptSignin';
+import Error from './ErrorMessage';
 import formatMoney from '../lib/formatMoney';
 
 const ORDERS_QUERY = gql`
@@ -34,10 +34,9 @@ const OrdersListStyled = styled.ul`
   grid-template-column: repeat(auto-fit, minmax(40%, 1fr));
 `;
 
-const Orders = ({ data: { loading, error, orders } }) => {
-  return (
-    <PromptSignin>
-      {() => {
+const Orders = ({ data: { loading, error, orders } }) => (
+  <PromptSignin>
+    {() => {
         console.log(orders);
         if (error) return <Error error={error} />;
         if (loading) return <p>Loading..</p>;
@@ -75,9 +74,8 @@ const Orders = ({ data: { loading, error, orders } }) => {
           </OrdersListStyled>
         );
       }}
-    </PromptSignin>
+  </PromptSignin>
   );
-};
 
 Orders.propTypes = {};
 

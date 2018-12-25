@@ -4,10 +4,10 @@ import StripeCheckout from 'react-stripe-checkout';
 import { graphql } from 'react-apollo';
 import NProgress from 'nprogress';
 import gql from 'graphql-tag';
+import { withRouter } from 'next/router';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import Error from './ErrorMessage';
 import User, { CURRENT_USER_QUERY } from './User';
-import { withRouter } from 'next/router';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
