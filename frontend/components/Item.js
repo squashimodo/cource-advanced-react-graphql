@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import User from './User';
 import formatCurrency from '../lib/formatMoney';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
+import PriceTag from './styles/PriceTag';
+import Title from './styles/Title';
 
 const StyledItem = styled.div`
   position: relative;
@@ -36,16 +37,6 @@ const StyledItem = styled.div`
     text-align: center;
   }
 
-  .item__price {
-    position: absolute;
-    top: -5px;
-    right: -1%;
-    padding: 5px 10px;
-    background: ${({ theme }) => theme.orangeGradient};
-    transform: rotate(${() => Math.random() * 6 - 3}deg);
-    color: white;
-    font-family: RadnikaNext;
-  }
   .item__actions {
     justify-self: flex-end;
     display: flex;
@@ -62,9 +53,7 @@ const StyledItem = styled.div`
   }
 
   .item__image {
-    background-image: url(${props => props.image});
-    background-size: cover;
-    background-position: center center;
+    object-fit: cover;
     height: 200px;
   }
 `;
@@ -74,7 +63,8 @@ const Item = props => {
   const { id, title, description, price, image } = item;
   return (
     <StyledItem {...item} className="item">
-      <div className="item__title">
+      <img className="item__image" src={image} alt={title} />
+      <Title>
         <Link
           href={{
             pathname: '/item',
@@ -85,10 +75,9 @@ const Item = props => {
         >
           <a>{title}</a>
         </Link>
-      </div>
-      <div className="item__image" />
+      </Title>
       <div className="item__description">{description}</div>
-      <div className="item__price">{formatCurrency(price)}</div>
+      <PriceTag>{formatCurrency(price)}</PriceTag>
       <div className="item__actions">
         <Link
           href={{
@@ -103,7 +92,7 @@ const Item = props => {
         <AddToCart item={item}>
           {({ addToCart }) => (
             <button type="button" onClick={addToCart}>
-              Add to
+              Add to&nbsp;
               <span role="img" aria-label="Shoppingcart">
                 🛒
               </span>
