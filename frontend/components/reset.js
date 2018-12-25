@@ -38,12 +38,14 @@ class Reset extends Component {
   };
 
   render() {
+    const { resetToken, onReset } = this.props;
+    const { done } = this.state;
     return (
       <Mutation
         mutation={RESET_PASSWORD_MUTATION}
         variables={{
           ...this.state,
-          resetToken: this.props.resetToken,
+          resetToken,
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
@@ -58,14 +60,14 @@ class Reset extends Component {
                 confirmPassword: '',
               });
 
-              this.props.onReset();
+              onReset();
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Reset password</h2>
               <Error error={error} />
               <Input
-                disabled={this.state.done}
+                disabled={done}
                 id="resetpw"
                 title="Password"
                 propName="password"
@@ -74,7 +76,7 @@ class Reset extends Component {
                 onChange={this.changeProp}
               />
               <Input
-                disabled={this.state.done}
+                disabled={done}
                 id="resetpwconfirm"
                 title="Confirm Password"
                 propName="confirmPassword"
@@ -82,12 +84,7 @@ class Reset extends Component {
                 type="password"
                 onChange={this.changeProp}
               />
-              <input
-                type="button"
-                disabled={this.state.done}
-                type="submit"
-                value="Reset password"
-              />
+              <input disabled={done} type="submit" value="Reset password" />
             </fieldset>
           </Form>
         )}

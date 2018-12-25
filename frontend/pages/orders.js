@@ -1,23 +1,16 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import PromptSignin from '../components/PromptSignin';
 import Orders from '../components/Orders';
 
-class OrdersPage extends PureComponent {
-  render() {
-    return (
-      <PromptSignin>
-        {() => (
-          <div>
-            <h2>Orders</h2>
-            <Orders />
-          </div>
-        )}
-      </PromptSignin>
-    );
-  }
-}
-
-OrdersPage.propTypes = {};
+const OrdersPage = () => (
+  <PromptSignin>
+    {() => (
+      <div>
+        <h2>Orders</h2>
+        <Orders />
+      </div>
+    )}
+  </PromptSignin>
+);
 
 export default OrdersPage;

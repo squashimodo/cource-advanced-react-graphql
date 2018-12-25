@@ -1,7 +1,7 @@
-export default function(amount) {
+export default function(amount, currency = 'EUR') {
   const options = {
     style: 'currency',
-    currency: 'EUR',
+    currency,
     minimumFractionDigits: 2,
   };
   // if its a whole, dollar amount, leave off the .00

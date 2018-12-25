@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 import Header from './Header';
 import Meta from './Meta';
@@ -61,19 +61,14 @@ const Inner = styled.div`
   padding: 2rem;
 `;
 
-class Page extends Component {
-  render() {
-    const { children } = this.props;
-    return (
-      <ThemeProvider theme={theme}>
-        <StyledPage>
-          <Meta />
-          <Header />
-          <Inner>{children}</Inner>
-        </StyledPage>
-      </ThemeProvider>
-    );
-  }
-}
+const Page = ({ children }) => (
+  <ThemeProvider theme={theme}>
+    <StyledPage>
+      <Meta />
+      <Header />
+      <Inner>{children}</Inner>
+    </StyledPage>
+  </ThemeProvider>
+);
 
 export default Page;

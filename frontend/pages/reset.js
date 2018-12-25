@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'next/router';
 import Reset from '../components/reset';
 
-class ResetPage extends Component {
-  onReset = () => {
-    this.props.router.push('/');
-  };
+const ResetPage = ({ router, query, ...props }) => {
+  const onReset = () => router.push('/');
 
-  render() {
-    const { router, ...props } = this.props;
-    if (!props.query.resetToken) {
-      router.replace('/');
-    }
-    return (
-      <div>
-        <p>Reset your password {props.query.resetToken}</p>
-        <Reset onReset={this.onReset} resetToken={props.query.resetToken} />
-      </div>
-    );
+  if (!query.resetToken) {
+    router.replace('/');
   }
-}
+
+  return (
+    <div>
+      <p>Reset your password {query.resetToken}</p>
+      <Reset onReset={onReset} resetToken={query.resetToken} />
+    </div>
+  );
+};
 
 export default withRouter(ResetPage);

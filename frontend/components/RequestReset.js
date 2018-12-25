@@ -26,6 +26,7 @@ class Signin extends Component {
   };
 
   render() {
+    const { done, email } = this.state;
     return (
       <Mutation mutation={REQUEST_RESET_MUTATION} variables={this.state}>
         {(requestReset, { error, loading }) => (
@@ -44,22 +45,17 @@ class Signin extends Component {
               <h2>Reset password</h2>
               <Error error={error} />
               <Input
-                disabled={this.state.done}
+                disabled={done}
                 id="requestresetemail"
                 title="Email"
                 propName="email"
                 placeholder="Email"
                 type="email"
-                value={this.state.email}
+                value={email}
                 onChange={this.changeProp}
               />
-              {this.state.done ? <p>Check your email!</p> : null}
-              <input
-                type="button"
-                disabled={this.state.done}
-                type="submit"
-                value="Reset"
-              />
+              {done ? <p>Check your email!</p> : null}
+              <input disabled={done} type="submit" value="Reset" />
             </fieldset>
           </Form>
         )}
