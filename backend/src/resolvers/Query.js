@@ -23,6 +23,20 @@ const Query = {
 
     return order;
   }),
+  orders: requireAuthenticated(async (parent, args, context, info) => {
+    const orders = await context.db.query.orders(
+      {
+        where: {
+          user: {
+            id: context.request.userId,
+          },
+        },
+      },
+      info
+    );
+
+    return orders;
+  }),
   me: (parent, args, context, info) => {
     const { userId } = context.request;
     return userId

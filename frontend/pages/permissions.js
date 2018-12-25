@@ -4,10 +4,8 @@ import Permissions from '../components/Permissions';
 
 const PermissionsPage = () => (
   <div>
-    <PromptSignin>
-      <Permissions />
-    </PromptSignin>
+    <PromptSignin>{() => <Permissions />}</PromptSignin>
   </div>
-  );
+);
 
 export default PermissionsPage;

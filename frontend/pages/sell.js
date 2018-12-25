@@ -7,8 +7,12 @@ class Sell extends Component {
     return (
       <div>
         <PromptSignin>
-          <h2>Sell</h2>
-          <CreateItem />
+          {() => (
+            <div>
+              <h2>Sell</h2>
+              <CreateItem />
+            </div>
+          )}
         </PromptSignin>
       </div>
     );

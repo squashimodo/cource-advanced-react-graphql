@@ -15,7 +15,7 @@ const PromptSignin = props => (
           </>
         );
       }
-      return props.children;
+      return props.children();
     }}
   </Query>
 );

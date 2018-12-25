@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 import PromptSignin from '../components/PromptSignin';
 import Orders from '../components/Orders';
 
-class OrderPage extends PureComponent {
+class OrdersPage extends PureComponent {
   render() {
     return (
-      <div>
-        <PromptSignin>
-          <h2>Orders</h2>
-          <Orders />
-        </PromptSignin>
-      </div>
+      <PromptSignin>
+        {() => (
+          <div>
+            <h2>Orders</h2>
+            <Orders />
+          </div>
+        )}
+      </PromptSignin>
     );
   }
 }
 
-OrderPage.propTypes = {};
+OrdersPage.propTypes = {};
 
-export default OrderPage;
+export default OrdersPage;

@@ -6,8 +6,12 @@ import Order from '../components/Order';
 const OrderPage = ({ query }) => {
   return (
     <PromptSignin>
-      <h2>Order {query.id}</h2>
-      <Order id={query.id} />
+      {() => (
+        <div>
+          <h2>Order {query.id}</h2>
+          <Order id={query.id} />
+        </div>
+      )}
     </PromptSignin>
   );
 };
