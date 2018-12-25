@@ -64,6 +64,7 @@ type Query {
   me: User
   users: [User]!
   cart: [CartItem!]!
+  order(id: ID!): Order!
 }
 
 type User {

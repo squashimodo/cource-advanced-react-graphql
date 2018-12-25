@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import Error from './ErrorMessage';
 import User, { CURRENT_USER_QUERY } from './User';
+import { withRouter } from 'next/router';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
@@ -27,13 +28,22 @@ function totalItems(cart) {
 }
 class TakeMyMoney extends React.Component {
   onToken = async ({ id }) => {
-    const order = await this.props.createOrder({
+    const { createOrder, router } = this.props;
+    NProgress.start();
+    const order = await createOrder({
       variables: {
         token: id,
       },
+    }).catch(err => {
+      alert(err);
     });
 
-    console.log(order);
+    router.push({
+      pathname: '/order',
+      query: {
+        id: order.data.createOrder.id,
+      },
+    });
   };
 
   render() {
@@ -71,4 +81,4 @@ const withMutation = graphql(CREATE_ORDER_MUTATION, {
       ],
     },
 });
-export default withMutation(TakeMyMoney);
+export default withRouter(withMutation(TakeMyMoney));

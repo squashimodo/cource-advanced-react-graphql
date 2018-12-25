@@ -6,13 +6,7 @@ const randomBytes = promisify(crypto.randomBytes);
 const { transport, makeANiceEmail } = require('../mail');
 const { hasPermission } = require('../utils');
 const stripe = require('../stripe');
-
-const requireAuthenticated = function(fn) {
-  return async (parent, args, context, info) => {
-    if (!context.request.userId) throw new Error('NOO');
-    return fn(parent, args, context, info);
-  };
-};
+const { requireAuthenticated } = require('./helpers');
 
 const Mutations = {
   createItem: requireAuthenticated(async (parent, args, context, info) => {

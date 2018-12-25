@@ -1,14 +1,32 @@
 const { forwardTo } = require('prisma-binding');
 const { hasPermission } = require('../utils');
+const { requireAuthenticated } = require('./helpers.js');
 
 const Query = {
   items: forwardTo('db'),
   item: forwardTo('db'),
   itemsConnection: forwardTo('db'),
-  me: function(parent, args, ctx, info) {
-    const { userId } = ctx.request;
+  order: requireAuthenticated(async (parent, args, context, info) => {
+    const order = await context.db.query.order(
+      {
+        where: {
+          id: args.id,
+        },
+      },
+      info
+    );
+
+    const ownsOrder = order.user.id === context.request.userId;
+
+    if (!ownsOrder && !hasPermission(context.request.user, ['ADMIN']))
+      throw new Error('No Permissions');
+
+    return order;
+  }),
+  me: (parent, args, context, info) => {
+    const { userId } = context.request;
     return userId
-      ? ctx.db.query.user(
+      ? context.db.query.user(
           {
             where: {
               id: userId,
@@ -18,7 +36,7 @@ const Query = {
         )
       : null;
   },
-  users: function(parent, args, ctx, info) {
+  users: (parent, args, context, info) => {
     if (!ctx.request.userId) throw new Error('You must be logged in');
 
     hasPermission(ctx.request.user, ['ADMIN', 'PERMISSIONUDPATE']);
