@@ -5,6 +5,7 @@ const { promisify } = require('util');
 const randomBytes = promisify(crypto.randomBytes);
 const { transport, makeANiceEmail } = require('../mail');
 const { hasPermission } = require('../utils');
+const stripe = require('../stripe');
 
 const requireAuthenticated = function(fn) {
   return async (parent, args, context, info) => {
@@ -318,5 +319,71 @@ const Mutations = {
       info
     );
   }),
+
+  createOrder: requireAuthenticated(
+    async (parent, { token }, context, info) => {
+      const user = await context.db.query.user(
+        {
+          where: {
+            id: context.request.userId,
+          },
+        },
+        '{id name cart { id quantity item { title price description id image largeImage } }}'
+      );
+
+      if (!user) throw new Error('User not founr');
+
+      const amount = user.cart.reduce(
+        (total, cartItem) => total + cartItem.item.price * cartItem.quantity,
+        0
+      );
+
+      console.log(amount, 'amount');
+
+      const charge = await stripe.charges.create({
+        amount,
+        currency: 'USD',
+        source: token,
+      });
+
+      const orderItems = user.cart.map(cartItem => {
+        const { id, ...orderItem } = {
+          ...cartItem.item,
+          quantity: cartItem.quantity,
+          user: {
+            connect: {
+              id: context.request.userId,
+            },
+          },
+        };
+
+        return orderItem;
+      });
+      const order = await context.db.mutation.createOrder({
+        data: {
+          total: charge.amount,
+          charge: charge.id,
+          items: {
+            create: orderItems,
+          },
+          user: {
+            connect: {
+              id: context.request.userId,
+            },
+          },
+        },
+      });
+
+      const cartItemIds = user.cart.map(c => c.id);
+
+      await context.db.mutation.deleteManyCartItems({
+        where: {
+          id_in: cartItemIds,
+        },
+      });
+
+      return order;
+    }
+  ),
 };
 module.exports = Mutations;

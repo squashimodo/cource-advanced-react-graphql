@@ -7,40 +7,24 @@ type SuccessMessage {
 
 type Mutation {
   createItem(
-    title: String!,
-    description: String,
-    price: Int!,
-    image: String,
-    largeImage: String
-  ) : Item!
-
-  deleteItem(
-    id: ID!
-  ) : Item
-
-  updateItem(
-    id: ID!
-    title: String
+    title: String!
     description: String
-    price: Int
-  ): Item
-  
-  signup(
-    email: String!
-    password: String!
-    name: String!
-  ): User!
+    price: Int!
+    image: String
+    largeImage: String
+  ): Item!
 
-  signin(
-    email: String!
-    password: String!
-  ) : User!
+  deleteItem(id: ID!): Item
+
+  updateItem(id: ID!, title: String, description: String, price: Int): Item
+
+  signup(email: String!, password: String!, name: String!): User!
+
+  signin(email: String!, password: String!): User!
 
   signout: SuccessMessage
 
-  requestReset(
-    email: String!
-  ) : SuccessMessage
+  requestReset(email: String!): SuccessMessage
 
   resetPassword(
     confirmPassword: String!
@@ -48,32 +32,35 @@ type Mutation {
     resetToken: String!
   ): User!
 
-  updatePermissions(
-    permissions: [Permission]
-    userId: ID!  
-  ): User
+  updatePermissions(permissions: [Permission], userId: ID!): User
 
-  addToCart(
-    id: ID!
-  ) : CartItem
+  addToCart(id: ID!): CartItem
 
-  removeFromCart(
-    id: ID!
-  ) : CartItem
+  removeFromCart(id: ID!): CartItem
+
+  createOrder(token: String!): Order!
 }
 
-
 type Query {
-  items(where: ItemWhereInput,
-    orderBy: ItemOrderByInput,
-    skip: Int,
-    after: String,
-    before: String,
-    first: Int,
+  items(
+    where: ItemWhereInput
+    orderBy: ItemOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
     last: Int
-    ): [Item]!
+  ): [Item]!
   item(where: ItemWhereUniqueInput!): Item
-  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  itemsConnection(
+    where: ItemWhereInput
+    orderBy: ItemOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): ItemConnection!
   me: User
   users: [User]!
   cart: [CartItem!]!

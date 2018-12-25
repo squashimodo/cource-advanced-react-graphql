@@ -10,6 +10,7 @@ import { CURRENT_USER_QUERY } from './User';
 import CartItem from './CartItem';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from '../lib/formatMoney';
+import TakeMyMoney from './TakeMyMoney';
 
 export const LOCAL_STATE_QUERY = gql`
   query {
@@ -40,6 +41,11 @@ const Cart = ({ cart, userName, open, toggleCart, ...props }) => {
       </ul>
       <footer>
         <p>{formatMoney(calcTotalPrice(cart))}</p>
+        <p>
+          {cart.length && (
+            <TakeMyMoney>{() => <SickButton>Checkout</SickButton>}</TakeMyMoney>
+          )}
+        </p>
       </footer>
     </CartStyles>
   );
