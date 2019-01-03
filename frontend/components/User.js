@@ -10,6 +10,12 @@ const CURRENT_USER_QUERY = gql`
       name
       email
       permissions
+      favorites {
+        id
+        item {
+          id
+        }
+      }
       cart {
         id
         quantity

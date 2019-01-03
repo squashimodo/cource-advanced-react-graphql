@@ -7,6 +7,8 @@ import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
 import PriceTag from './styles/PriceTag';
 import Title from './styles/Title';
+import ToggleFavorite from './ToggleFavorite';
+import User from './User';
 
 const StyledItem = styled.div`
   position: relative;
@@ -61,6 +63,11 @@ const StyledItem = styled.div`
 const Item = props => {
   const { item } = props;
   const { id, title, description, price, image } = item;
+
+  function isFavorite(me, itemToCheck) {
+    return me.favorites.find(f => f.item.id === itemToCheck.id);
+  }
+
   return (
     <StyledItem {...item} className="item">
       <img className="item__image" src={image} alt={title} />
@@ -99,10 +106,20 @@ const Item = props => {
             </button>
           )}
         </AddToCart>
-
-        <Link href="/">
-          <a onClick={() => {}}>Add to ❤️</a>
-        </Link>
+        <User>
+          {({ data: { me } }) => {
+            if (!me) return null;
+            return (
+              <ToggleFavorite favorites={me.favorites} id={item.id}>
+                {({ toggleFavorite }) => (
+                  <button type="button" onClick={toggleFavorite}>
+                    {isFavorite(me, item) ? 'Remove from ' : 'Add to '} 💖
+                  </button>
+                )}
+              </ToggleFavorite>
+            );
+          }}
+        </User>
         <DeleteItem id={id}>Remove ☠️</DeleteItem>
       </div>
     </StyledItem>

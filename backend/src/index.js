@@ -26,7 +26,12 @@ server.express.use(async (req, res, next) => {
         id: userId,
       },
     },
-    '{ id, permissions, email, name}'
+    `{ 
+      id
+      permissions
+      email
+      name
+    }`
   );
   if (!user) return next();
 

@@ -6,6 +6,31 @@ const Query = {
   items: forwardTo('db'),
   item: forwardTo('db'),
   itemsConnection: forwardTo('db'),
+  favorites: requireAuthenticated(async (parent, args, context, info) => {
+    const user = await context.db.query.user(
+      {
+        where: {
+          id: context.request.userId,
+        },
+      },
+      `
+      {
+        favorites {
+          id
+          item {
+            id
+            title
+            description
+            image
+            largeImage
+          }
+        }
+      }
+    `
+    );
+
+    return user.favorites;
+  }),
   order: requireAuthenticated(async (parent, args, context, info) => {
     const order = await context.db.query.order(
       {

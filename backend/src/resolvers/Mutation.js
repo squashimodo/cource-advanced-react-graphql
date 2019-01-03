@@ -9,6 +9,99 @@ const stripe = require('../stripe');
 const { requireAuthenticated } = require('./helpers');
 
 const Mutations = {
+  removeFavorite: async (parent, args, context, info) => {
+    const user = await context.db.query.user(
+      {
+        where: {
+          id: context.request.userId,
+        },
+      },
+      `
+      {
+        id
+        favorites {
+          id
+          item {
+            id
+          }
+        }
+      }
+    `
+    );
+
+    const favorite = user.favorites.find(f => f.item.id === args.id);
+    if (!favorite) throw new Error('Item not in favorites');
+
+    const deletedFavorite = await context.db.mutation.deleteFavorite(
+      {
+        where: {
+          id: favorite.id,
+        },
+      },
+      `
+      {
+        id
+      }
+    `
+    );
+
+    return deletedFavorite;
+  },
+  addFavorite: async (parent, args, context, info) => {
+    const user = await context.db.query.user(
+      {
+        where: {
+          id: context.request.userId,
+        },
+      },
+      `
+      {
+        id
+        favorites {
+          item {
+            id
+          }
+        }
+      }
+    `
+    );
+
+    if (user.favorites.find(f => f.item.id === args.itemId))
+      throw new Error('Item already in favorites');
+
+    const updatedUser = await context.db.mutation.updateUser(
+      {
+        where: {
+          id: context.request.userId,
+        },
+        data: {
+          favorites: {
+            create: {
+              item: {
+                connect: {
+                  id: args.itemId,
+                },
+              },
+            },
+          },
+        },
+      },
+      `
+      {
+        favorites {
+          id
+          item {
+            id
+          }
+        }
+      }
+    `
+    );
+
+    const favorite = [...updatedUser.favorites].pop();
+
+    return favorite;
+  },
   createItem: requireAuthenticated(async (parent, args, context, info) => {
     return await context.db.mutation.createItem(
       {

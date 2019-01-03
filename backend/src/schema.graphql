@@ -39,6 +39,9 @@ type Mutation {
   removeFromCart(id: ID!): CartItem
 
   createOrder(token: String!): Order!
+
+  addFavorite(itemId: ID!): Favorite!
+  removeFavorite(id: ID!): Favorite!
 }
 
 type Query {
@@ -66,6 +69,7 @@ type Query {
   cart: [CartItem!]!
   order(id: ID!): Order!
   orders(orderBy: OrderOrderByInput): [Order]!
+  favorites(orderBy: OrderOrderByInput): [Favorite!]!
 }
 
 type User {
@@ -74,4 +78,5 @@ type User {
   email: String!
   permissions: [Permission!]!
   cart: [CartItem!]!
+  favorites: [Favorite!]!
 }
