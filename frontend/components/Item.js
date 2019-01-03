@@ -15,7 +15,7 @@ const StyledItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 450px;
+  min-height: 450px;
 
   box-shadow: 1px 5px 12px 2px #0000000d;
   border-radius: 10px;
@@ -37,6 +37,8 @@ const StyledItem = styled.div`
 
   .item__description {
     text-align: center;
+    font-weight: normal;
+    padding: 12px 22px;
   }
 
   .item__actions {
@@ -94,7 +96,7 @@ const Item = props => {
             },
           }}
         >
-          <a>Edit ✏️</a>
+          <button type="button">Edit ✏️</button>
         </Link>
         <AddToCart item={item}>
           {({ addToCart }) => (

@@ -13,12 +13,7 @@ const menuItems = [
     requrieAuth: false,
   },
   {
-    label: 'Buy stuff 🤑',
-    href: '/items',
-    requrieAuth: false,
-  },
-  {
-    label: 'Sell stuff 📈',
+    label: 'Sell stuff',
     href: '/sell',
     requireAuth: true,
   },
@@ -29,12 +24,12 @@ const menuItems = [
     requireAuth: false,
   },
   {
-    label: 'Orders 📝',
+    label: 'Orders',
     href: '/orders',
     requireAuth: true,
   },
   {
-    label: 'Favorites 💖',
+    label: 'Favorites',
     href: '/favorites',
     requireAuth: true,
   },
@@ -43,6 +38,11 @@ const menuItems = [
 const Menu = styled.ul`
   list-style: none;
   display: flex;
+  align-items: center;
+
+  @media (max-width: 1300px) {
+    justify-content: center;
+  }
 `;
 
 const MenuItem = styled.li`
@@ -50,7 +50,10 @@ const MenuItem = styled.li`
   transform: skew(-7deg);
   padding: 10px;
   font-family: RadnikaNext;
-
+  font-size: 2rem;
+  @media (min-width: 1300px) {
+    font-size: 1.6rem;
+  }
   a {
     display: block;
     position: relative;
@@ -58,11 +61,13 @@ const MenuItem = styled.li`
     text-decoration: none;
     font-weight: bold;
     transition: transform 0.1s ease-in-out;
+    text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.3);
 
     &:hover,
     &:focus,
     &.active {
       transform: scale(1.3);
+      text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.5);
     }
 
     &:hover:after,
@@ -92,33 +97,13 @@ class Navigation extends Component {
         <User>
           {({ data: { me } }) => (
             <React.Fragment>
-              {me && (
-                <Signout>
-                  {({ signout }) => (
-                    <>
-                      <MenuItem>{me.name}</MenuItem>{' '}
-                      <MenuItem>
-                        <a
-                          href="#"
-                          onClick={async () => {
-                            await signout();
-                          }}
-                        >
-                          Log out
-                        </a>
-                      </MenuItem>
-                    </>
-                  )}
-                </Signout>
-              )}
               {menuItems
                 .filter(item => {
                   if (me) {
                     if (item.hideWhenLoggedIn) return false;
                     if (item.requireAuth) return true;
-                  } else {
-                    return !item.requireAuth;
                   }
+                  return !item.requireAuth;
                 })
                 .map(item => (
                   <MenuItem key={`${item.href}${item.label}`}>
@@ -145,6 +130,24 @@ class Navigation extends Component {
                     </>
                   )}
                 </ToggleCart>
+              )}
+              {me && (
+                <Signout>
+                  {({ signout }) => (
+                    <>
+                      <MenuItem>
+                        <a
+                          href="#"
+                          onClick={async () => {
+                            await signout();
+                          }}
+                        >
+                          Log out {me.name}
+                        </a>
+                      </MenuItem>
+                    </>
+                  )}
+                </Signout>
               )}
             </React.Fragment>
           )}

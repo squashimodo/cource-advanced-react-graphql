@@ -47,7 +47,6 @@ class TakeMyMoney extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const { children } = this.props;
     return (
       <User>
@@ -72,13 +71,12 @@ class TakeMyMoney extends React.Component {
 
 const withMutation = graphql(CREATE_ORDER_MUTATION, {
   name: 'createOrder',
-  options: props =>
-    console.log(props) || {
-      refetchQueries: [
-        {
-          query: CURRENT_USER_QUERY,
-        },
-      ],
-    },
+  options: () => ({
+    refetchQueries: [
+      {
+        query: CURRENT_USER_QUERY,
+      },
+    ],
+  }),
 });
 export default withRouter(withMutation(TakeMyMoney));

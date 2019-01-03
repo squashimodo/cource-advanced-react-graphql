@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const NavStyles = styled.ul`
-  margin: 0;
+  margin: 100px;
   padding: 0;
   display: flex;
   justify-self: end;
@@ -57,7 +57,7 @@ const NavStyles = styled.ul`
     border-top: 1px solid ${props => props.theme.lightgrey};
     width: 100%;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 4rem;
   }
 `;
 

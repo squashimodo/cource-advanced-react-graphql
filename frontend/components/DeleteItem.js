@@ -10,6 +10,9 @@ import { CURRENT_USER_QUERY } from './User';
 
 const StyledLink = styled('a')`
   text-decoration: ${({ loading }) => (loading ? 'line-through' : '')};
+  &:visited {
+    color: inherit;
+  }
 `;
 
 const DELETE_ITEM_MUTATION = gql`
@@ -49,9 +52,9 @@ class DeleteItem extends Component {
       >
         {(deleteItem, { loading }) => (
           <Link href="#">
-            <StyledLink
-              href="#"
-              loading={loading}
+            <button
+              type="button"
+              loading={loading.toString()}
               onClick={async e => {
                 e.preventDefault();
                 if (confirm('Are you sure you want to delete this item?')) {
@@ -69,7 +72,7 @@ class DeleteItem extends Component {
               }}
             >
               {children}
-            </StyledLink>
+            </button>
           </Link>
         )}
       </Mutation>

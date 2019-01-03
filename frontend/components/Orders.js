@@ -37,45 +37,44 @@ const OrdersListStyled = styled.ul`
 const Orders = ({ data: { loading, error, orders } }) => (
   <PromptSignin>
     {() => {
-        console.log(orders);
-        if (error) return <Error error={error} />;
-        if (loading) return <p>Loading..</p>;
+      if (error) return <Error error={error} />;
+      if (loading) return <p>Loading..</p>;
 
-        return (
-          <OrdersListStyled>
-            {orders.map(order => (
-              <OrderItemStyles key={order.id}>
-                <Link
-                  href={{
-                    pathname: '/order',
-                    query: {
-                      id: order.id,
-                    },
-                  }}
-                >
-                  <a>
-                    <div className="order-meta">
-                      <p>
-                        {order.items.reduce((a, b) => a + b.quantity, 0)} items
-                      </p>
-                      <p>{order.items.length} products</p>
-                      <p>{formatDistance(order.createdAt, new Date())} ago</p>
-                      <p>{formatMoney(order.total)} total</p>
-                    </div>
-                    <div className="images">
-                      {order.items.map(item => (
-                        <img src={item.image} alt={item.title} />
-                      ))}
-                    </div>
-                  </a>
-                </Link>
-              </OrderItemStyles>
-            ))}
-          </OrdersListStyled>
-        );
-      }}
+      return (
+        <OrdersListStyled>
+          {orders.map(order => (
+            <OrderItemStyles key={order.id}>
+              <Link
+                href={{
+                  pathname: '/order',
+                  query: {
+                    id: order.id,
+                  },
+                }}
+              >
+                <a>
+                  <div className="order-meta">
+                    <p>
+                      {order.items.reduce((a, b) => a + b.quantity, 0)} items
+                    </p>
+                    <p>{order.items.length} products</p>
+                    <p>{formatDistance(order.createdAt, new Date())} ago</p>
+                    <p>{formatMoney(order.total)} total</p>
+                  </div>
+                  <div className="images">
+                    {order.items.map(item => (
+                      <img src={item.image} alt={item.title} />
+                    ))}
+                  </div>
+                </a>
+              </Link>
+            </OrderItemStyles>
+          ))}
+        </OrdersListStyled>
+      );
+    }}
   </PromptSignin>
-  );
+);
 
 Orders.propTypes = {};
 

@@ -7,28 +7,29 @@ import AutoComplete from './Search';
 
 const floating = keyframes`
   from {
-    transform: translate(0, 0px) rotateY(-12deg);
+    transform: translate(0, 0px) rotateY(-17deg);
     text-shadow: 7px 7px 3px rgba(0,0,0,0.15);
   }
   50% {
-    transform: translate(0, 10px) rotateY(5deg) rotateX(5deg);
-    text-shadow: -7px -7px 3px rgba(0,0,0,0.15);
+    transform: translate(0, 14px) rotateY(7deg) rotateX(7deg);
+    text-shadow: -7px -7px 3px rgba(0,0,0,0.2);
   }
   to {
-    transform: translate(0, 0px) rotateY(-8deg);
+    transform: translate(0, 0px) rotateY(-14deg);
     text-shadow: 7px 7px 3px rgba(0,0,0,0.15);
   }
 `;
 
 const Logo = styled.h1`
   animation: ${floating} 20s infinite;
-  font-size: 4rem;
-  margin-left: 2rem;
+  font-size: 6rem;
+  text-align: center;
+  margin: 0;
   position: relative;
   z-index: 2;
   transform: skew(-10deg);
   font-family: RadnikaNext;
-  padding: 100px 0 30px 0;
+  padding: 30px 0 30px 28px;
 
   a {
     padding: 0.5rem 1rem;
@@ -38,9 +39,10 @@ const Logo = styled.h1`
     text-transform: uppercase;
   }
 
-  @media (max-width: 1300px) {
-    margin: 0;
-    text-align: center;
+  @media (min-width: 1300px) {
+    margin-left: 2rem;
+    font-size: 4rem;
+    text-align: left;
   }
 `;
 
